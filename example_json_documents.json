@@ -1,0 +1,93 @@
+{ // user
+  "user_id": "u123",
+  "name": "Foo Bar",
+  "roles": "admin", // others are "user" for buyers & sellers
+  "email": "emma@example.com",
+  "phone": "666666666"
+}
+
+{
+    "permissions": {
+      "buyer": ["view_products", "make_purchase"],
+      "seller": ["view_products", "list_product", "edit_product", "delete_product"],
+      "admin": ["view_products", "edit_product", "delete_product", "delete_user", "manage_roles"]
+    }
+}
+
+{ // product
+    "product_id": "prod_00123",
+    "seller_id": "user123", // refers to a user_id
+    "name": "Minimalist Leather Backpack",
+    "description": "A sleek and durable backpack for everyday use.",
+    "price": 89.99,
+    "categories": ["bags", "leather", "travel"],
+    "images": [
+      "https://cdn.shop.com/images/prod_00123_front.jpg",
+      "https://cdn.shop.com/images/prod_00123_side.jpg"
+    ],
+}
+
+{ // cart
+    "_id": "cart_00123",
+    "user_id": "user_789",  // reference to the user
+    "items": [
+      {
+        "product_id": "prod_101", // reference to the product
+        "name": "Wireless Mouse",
+        "quantity": 2,
+        "price": 25.00,
+      },
+      {
+        "product_id": "prod_102",
+        "name": "Laptop Stand",
+        "quantity": 1,
+        "price": 40.00
+      }
+    ]
+}
+  
+{ // order
+    "_id": "txn_20250328_0001",
+    "user_id": "user_00123",
+    "order_id": "order_00089",
+    "items": [
+      {
+        "product_id": "prod_456", // refers to a "product_id" in a product
+        "name": "Wireless Earbuds",
+        "quantity": 1,
+        "unit_price": 100,
+        "subtotal": 100
+      },
+      {
+        "product_id": "prod_789",
+        "name": "Phone Case",
+        "quantity": 2,
+        "unit_price": 25,
+        "subtotal": 50
+      }
+    ],
+    "subtotal": 150,
+    "tax": 15, // 10% of subtotal
+    "shipping_fee": 5,
+    "total": 170,
+    "payment_method": "credit_card", // or PayPal, ApplePay, etc.
+    "payment_status": "completed",  // pending, failed, refunded, etc.
+    "transaction_date": "2025-03-28T14:22:00Z",
+    "billing_address": {
+      "name": "Foo bar",
+      "street": "example Lane",
+      "city": "Vancouver",
+      "state": "BC",
+      "zip": "",
+      "country": "Canada"
+    },
+    "shipping_address": {
+      "name": "Foo Bar",
+      "street": "example Lane",
+      "city": "Vancouver",
+      "state": "BC",
+      "zip": "",
+      "country": "Canada"
+    },
+    "submission_date": "2025-03-28T14:22:00Z"
+}
