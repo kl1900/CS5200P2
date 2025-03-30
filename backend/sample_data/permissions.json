@@ -1,0 +1,7 @@
+{
+    "permissions": {
+      "buyer": ["view_products", "make_purchase"],
+      "seller": ["view_products", "list_product", "edit_product", "delete_product"],
+      "admin": ["view_products", "edit_product", "delete_product", "delete_user", "manage_roles"]
+    }
+  }

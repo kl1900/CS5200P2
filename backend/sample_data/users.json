@@ -1,0 +1,149 @@
+[
+    {
+      "user_id": "u123",
+      "name": "Foo Bar",
+      "roles": "admin",
+      "email": "emma@example.com",
+      "phone": "666666666"
+    },
+    {
+      "user_id": "user_001",
+      "name": "Alice Johnson",
+      "roles": "buyer",
+      "email": "alice@example.com",
+      "phone": "111-111-1111"
+    },
+    {
+      "user_id": "user_002",
+      "name": "Bob Smith",
+      "roles": "seller",
+      "email": "bob@fakeemail.com",
+      "phone": "222-222-2222"
+    },
+    {
+      "user_id": "user_003",
+      "name": "Charlie Davis",
+      "roles": "buyer",
+      "email": "charlie@example.com",
+      "phone": "333-333-3333"
+    },
+    {
+      "user_id": "user_004",
+      "name": "Dana Lee",
+      "roles": "seller",
+      "email": "dana@fakeemail.com",
+      "phone": "444-444-4444"
+    },
+    {
+      "user_id": "user_005",
+      "name": "Evan Rodriguez",
+      "roles": "admin",
+      "email": "evan@example.com",
+      "phone": "555-555-5555"
+    },
+    {
+      "user_id": "user_006",
+      "name": "Fiona Garcia",
+      "roles": "buyer",
+      "email": "fiona@fakeemail.com",
+      "phone": "666-666-6666"
+    },
+    {
+      "user_id": "user_007",
+      "name": "George Kim",
+      "roles": "seller",
+      "email": "george@example.com",
+      "phone": "777-777-7777"
+    },
+    {
+      "user_id": "user_008",
+      "name": "Hannah Patel",
+      "roles": "buyer",
+      "email": "hannah@fakeemail.com",
+      "phone": "888-888-8888"
+    },
+    {
+      "user_id": "user_009",
+      "name": "Ian Thompson",
+      "roles": "seller",
+      "email": "ian@example.com",
+      "phone": "999-999-9999"
+    },
+    {
+      "user_id": "user_010",
+      "name": "Julia Martinez",
+      "roles": "buyer",
+      "email": "julia@fakeemail.com",
+      "phone": "101-010-1010"
+    },
+    {
+      "user_id": "user_011",
+      "name": "Kevin Brown",
+      "roles": "seller",
+      "email": "kevin@example.com",
+      "phone": "202-202-2020"
+    },
+    {
+      "user_id": "user_012",
+      "name": "Laura Wilson",
+      "roles": "buyer",
+      "email": "laura@fakeemail.com",
+      "phone": "303-303-3030"
+    },
+    {
+      "user_id": "user_013",
+      "name": "Michael Clark",
+      "roles": "seller",
+      "email": "michael@example.com",
+      "phone": "404-404-4040"
+    },
+    {
+      "user_id": "user_014",
+      "name": "Nina Rodriguez",
+      "roles": "buyer",
+      "email": "nina@fakeemail.com",
+      "phone": "505-505-5050"
+    },
+    {
+      "user_id": "user_015",
+      "name": "Oscar Hernandez",
+      "roles": "seller",
+      "email": "oscar@example.com",
+      "phone": "606-606-6060"
+    },
+    {
+      "user_id": "user_016",
+      "name": "Paula Adams",
+      "roles": "buyer",
+      "email": "paula@fakeemail.com",
+      "phone": "707-707-7070"
+    },
+    {
+      "user_id": "user_017",
+      "name": "Quincy Evans",
+      "roles": "seller",
+      "email": "quincy@example.com",
+      "phone": "808-808-8080"
+    },
+    {
+      "user_id": "user_018",
+      "name": "Rachel Green",
+      "roles": "buyer",
+      "email": "rachel@fakeemail.com",
+      "phone": "909-909-9090"
+    },
+    {
+      "user_id": "user_019",
+      "name": "Samuel King",
+      "roles": "seller",
+      "email": "samuel@example.com",
+      "phone": "010-010-0101"
+    },
+    {
+      "user_id": "user_020",
+      "name": "Tina Moore",
+      "roles": "buyer",
+      "email": "tina@fakeemail.com",
+      "phone": "121-212-1212"
+    }
+  ]
