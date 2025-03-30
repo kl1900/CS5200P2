@@ -1,6 +1,26 @@
 # CS5200P2
 
-Topic and features:
+## Setting up application
+Having docker installed.
+
+Run
+```
+docker-compose up --build -d
+```
+It runs 4 services:
+1. mongo
+2. mongo-express (mongodb admin) url: http://localhost:8081
+    - usrname `admin`
+    - password `5200`
+3. flask server url: http://localhost:5000
+4. react front end url: http://localhost:5173
+
+to cleanup containers
+```
+docker-compose down --volumes --remove-orphans
+```
+
+## Topic and features:
 Secure Online Marketplace (E-Commerce):
 - Users can buy/sell products, add to cart, and checkout.
 - Transactions should be ACID-compliant (ensure inventory updates correctly).

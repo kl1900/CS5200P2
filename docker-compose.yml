@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+  
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=5200
+    depends_on:
+      - mongo
+
+  backend:
+    build: ./backend
+    container_name: flask-backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/app
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mydb
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./frontend
+    container_name: react-frontend
+    ports:
+      - "5173:5173"  # Vite default port
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - backend  # if you have one
+
+
+volumes:
+  mongo-data:
