@@ -1,203 +1,202 @@
 [
-    {
-      "product_id": "prod_00123",
-      "seller_id": "user123",
-      "name": "Minimalist Leather Backpack",
-      "description": "A sleek and durable backpack for everyday use.",
-      "price": 89.99,
-      "images": [
-        "https://images.unsplash.com/photo-1573497019410-4490b8cfc4d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60",
-        "https://images.unsplash.com/photo-1573497019404-cb0ac3d0e9f8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00001",
-      "seller_id": "user_002",
-      "name": "Ergonomic Office Chair",
-      "description": "Comfortable office chair with lumbar support.",
-      "price": 199.99,
-      "images": [
-        "/sample_data/images/Ergonomic Office Chair.png"
+  {
+    "product_id": "prod_00123",
+    "seller_id": "user_002",
+    "name": "Minimalist Leather Backpack",
+    "description": "A sleek and durable backpack for everyday use.",
+    "price": 89.99,
+    "images": [
+      "/sample_data/images/leather backpack.jpg"
     ]
-    },
-    {
-      "product_id": "prod_00002",
-      "seller_id": "user_004",
-      "name": "Wireless Mouse",
-      "description": "Ergonomic wireless mouse with adjustable DPI.",
-      "price": 25.00,
-      "images": [
-        "https://images.unsplash.com/photo-1587829741301-dc798b83add3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00003",
-      "seller_id": "user_007",
-      "name": "Bluetooth Headphones",
-      "description": "Noise-cancelling over-ear headphones.",
-      "price": 150.00,
-      "images": [
-        "https://images.unsplash.com/photo-1511376777868-611b54f68947?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00004",
-      "seller_id": "user_009",
-      "name": "Stainless Steel Water Bottle",
-      "description": "Insulated water bottle keeps drinks cold or hot.",
-      "price": 20.00,
-      "images": [
-        "https://images.unsplash.com/photo-1526401281623-3b83bdbf1691?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00005",
-      "seller_id": "user_011",
-      "name": "Cotton T-Shirt",
-      "description": "100% cotton t-shirt available in multiple colors.",
-      "price": 15.99,
-      "images": [
-        "https://images.unsplash.com/photo-1574169208507-843761748a4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00006",
-      "seller_id": "user_013",
-      "name": "Running Shoes",
-      "description": "Lightweight running shoes for daily exercise.",
-      "price": 75.00,
-      "images": [
-        "https://images.unsplash.com/photo-1519744346366-27a44c41d76d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00007",
-      "seller_id": "user_015",
-      "name": "Smart Watch",
-      "description": "Multi-functional smart watch with health tracking.",
-      "price": 199.99,
-      "images": [
-        "https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00008",
-      "seller_id": "user_017",
-      "name": "Desk Lamp",
-      "description": "LED desk lamp with adjustable brightness.",
-      "price": 35.50,
-      "images": [
-        "https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00009",
-      "seller_id": "user_019",
-      "name": "Yoga Mat",
-      "description": "Eco-friendly yoga mat with non-slip surface.",
-      "price": 40.00,
-      "images": [
-        "https://images.unsplash.com/photo-1603570418779-32967d7fae5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00010",
-      "seller_id": "user_002",
-      "name": "Sunglasses",
-      "description": "Polarized sunglasses for UV protection.",
-      "price": 50.00,
-      "images": [
-        "https://images.unsplash.com/photo-1555529669-27ec674bfa2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00011",
-      "seller_id": "user_004",
-      "name": "Leather Wallet",
-      "description": "Compact wallet crafted from genuine leather.",
-      "price": 45.00,
-      "images": [
-        "https://images.unsplash.com/photo-1610878180933-4a6512377b07?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00012",
-      "seller_id": "user_007",
-      "name": "Portable Charger",
-      "description": "10,000mAh portable charger with fast charging.",
-      "price": 30.00,
-      "images": [
-        "https://images.unsplash.com/photo-1560807707-8cc77767d783?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00013",
-      "seller_id": "user_009",
-      "name": "Ceramic Mug",
-      "description": "Handmade ceramic mug for coffee or tea.",
-      "price": 18.00,
-      "images": [
-        "https://images.unsplash.com/photo-1510626176961-4b532ba4a5b8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00014",
-      "seller_id": "user_011",
-      "name": "Backpack Organizer",
-      "description": "Organize your backpack with multiple compartments.",
-      "price": 22.50,
-      "images": [
-        "https://images.unsplash.com/photo-1580910051076-d32e2d34df6a?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00015",
-      "seller_id": "user_013",
-      "name": "Wireless Earbuds",
-      "description": "Compact and high-quality wireless earbuds.",
-      "price": 100.00,
-      "images": [
-        "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00016",
-      "seller_id": "user_015",
-      "name": "Laptop Stand",
-      "description": "Ergonomic laptop stand for better posture.",
-      "price": 40.00,
-      "images": [
-        "https://images.unsplash.com/photo-1573497491208-6b1acb260507?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00017",
-      "seller_id": "user_017",
-      "name": "Digital Camera",
-      "description": "High-resolution digital camera for photography.",
-      "price": 350.00,
-      "images": [
-        "https://images.unsplash.com/photo-1519183071298-a2962d0b0b16?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00018",
-      "seller_id": "user_019",
-      "name": "Fitness Tracker",
-      "description": "Monitor your activity and sleep patterns.",
-      "price": 60.00,
-      "images": [
-        "https://images.unsplash.com/photo-1573164574572-cb89e39749b4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    },
-    {
-      "product_id": "prod_00019",
-      "seller_id": "user_002",
-      "name": "Travel Pillow",
-      "description": "Comfortable travel pillow for long journeys.",
-      "price": 28.00,
-      "images": [
-        "https://images.unsplash.com/photo-1574719565916-f50e1c5b7e06?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
-      ]
-    }
-  ]
+  },
+  {
+    "product_id": "prod_00001",
+    "seller_id": "user_002",
+    "name": "Ergonomic Office Chair",
+    "description": "Comfortable office chair with lumbar support.",
+    "price": 199.99,
+    "images": [
+      "/sample_data/images/Ergonomic Office Chair.png"
+    ]
+  },
+  {
+    "product_id": "prod_00002",
+    "seller_id": "user_004",
+    "name": "Wireless Mouse",
+    "description": "Ergonomic wireless mouse with adjustable DPI.",
+    "price": 25.00,
+    "images": [
+      "/sample_data/images/mouse.png"
+    ]
+  },
+  {
+    "product_id": "prod_00003",
+    "seller_id": "user_007",
+    "name": "Bluetooth Headphones",
+    "description": "Noise-cancelling over-ear headphones.",
+    "price": 150.00,
+    "images": [
+      "/sample_data/images/headphone.png"
+    ]
+  },
+  {
+    "product_id": "prod_00004",
+    "seller_id": "user_009",
+    "name": "Stainless Steel Water Bottle",
+    "description": "Insulated water bottle keeps drinks cold or hot.",
+    "price": 20.00,
+    "images": [
+      "/sample_data/images/Stainless Steel Water Bottle.png"
+    ]
+  },
+  {
+    "product_id": "prod_00005",
+    "seller_id": "user_011",
+    "name": "Cotton T-Shirt",
+    "description": "100% cotton t-shirt available in multiple colors.",
+    "price": 15.99,
+    "images": [
+      "/sample_data/images/T-shirt.jpg"
+    ]
+  },
+  {
+    "product_id": "prod_00006",
+    "seller_id": "user_013",
+    "name": "Running Shoes",
+    "description": "Lightweight running shoes for daily exercise.",
+    "price": 75.00,
+    "images": [
+      "/sample_data/images/runningshoes.png"
+    ]
+  },
+  {
+    "product_id": "prod_00007",
+    "seller_id": "user_015",
+    "name": "Smart Watch",
+    "description": "Multi-functional smart watch with health tracking.",
+    "price": 199.99,
+    "images": [
+      "/sample_data/images/smartwatch.jpg"
+    ]
+  },
+  {
+    "product_id": "prod_00008",
+    "seller_id": "user_017",
+    "name": "Desk Lamp",
+    "description": "LED desk lamp with adjustable brightness.",
+    "price": 35.50,
+    "images": [
+      "/sample_data/images/desklamp.jpg"
+    ]
+  },
+  {
+    "product_id": "prod_00009",
+    "seller_id": "user_019",
+    "name": "Yoga Mat",
+    "description": "Eco-friendly yoga mat with non-slip surface.",
+    "price": 40.00,
+    "images": [
+      "/sample_data/images/Yoga Mat.jpg"
+    ]
+  },
+  {
+    "product_id": "prod_00010",
+    "seller_id": "user_002",
+    "name": "Sunglasses",
+    "description": "Polarized sunglasses for UV protection.",
+    "price": 50.00,
+    "images": [
+      "/sample_data/images/Sunglasses.png"
+    ]
+  },
+  {
+    "product_id": "prod_00011",
+    "seller_id": "user_004",
+    "name": "Leather Wallet",
+    "description": "Compact wallet crafted from genuine leather.",
+    "price": 45.00,
+    "images": [
+      "/sample_data/images/Leather Wallet.jpg"
+    ]
+  },
+  {
+    "product_id": "prod_00012",
+    "seller_id": "user_007",
+    "name": "Portable Charger",
+    "description": "10,000mAh portable charger with fast charging.",
+    "price": 30.00,
+    "images": [
+      "/sample_data/images/Portable Charger.jpg"
+    ]
+  },
+  {
+    "product_id": "prod_00013",
+    "seller_id": "user_009",
+    "name": "Ceramic Mug",
+    "description": "Handmade ceramic mug for coffee or tea.",
+    "price": 18.00,
+    "images": [
+      "/sample_data/images/Ceramic Mug.jpg"
+    ]
+  },
+  {
+    "product_id": "prod_00014",
+    "seller_id": "user_011",
+    "name": "Backpack Organizer",
+    "description": "Organize your backpack with multiple compartments.",
+    "price": 22.50,
+    "images": [
+      "/sample_data/images/Backpack Organizer.jpg"
+    ]
+  },
+  {
+    "product_id": "prod_00015",
+    "seller_id": "user_013",
+    "name": "Wireless Earbuds",
+    "description": "Compact and high-quality wireless earbuds.",
+    "price": 100.00,
+    "images": [
+      "/sample_data/images/Wireless Earbuds.jpg"
+    ]
+  },
+  {
+    "product_id": "prod_00016",
+    "seller_id": "user_015",
+    "name": "Laptop Stand",
+    "description": "Ergonomic laptop stand for better posture.",
+    "price": 40.00,
+    "images": [
+      "/sample_data/images/Laptop Stand.webp"
+    ]
+  },
+  {
+    "product_id": "prod_00017",
+    "seller_id": "user_017",
+    "name": "Digital Camera",
+    "description": "High-resolution digital camera for photography.",
+    "price": 350.00,
+    "images": [
+      "/sample_data/images/Digital Camera.jpg"
+    ]
+  },
+  {
+    "product_id": "prod_00018",
+    "seller_id": "user_019",
+    "name": "Fitness Tracker",
+    "description": "Monitor your activity and sleep patterns.",
+    "price": 60.00,
+    "images": [
+      "/sample_data/images/Fitness Tracker.jpg"
+    ]
+  },
+  {
+    "product_id": "prod_00019",
+    "seller_id": "user_002",
+    "name": "Travel Pillow",
+    "description": "Comfortable travel pillow for long journeys.",
+    "price": 28.00,
+    "images": [
+      "/sample_data/images/Travel Pillow.jpg"
+    ]
+  }
+]
