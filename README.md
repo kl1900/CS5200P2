@@ -3,6 +3,10 @@
 ## Setting up application
 Having docker installed.
 
+After git pulled this repo or unzipped this repo, open terminal
+```
+cd <project repo folder>
+```
 Run
 ```
 docker-compose up --build -d
@@ -15,6 +19,10 @@ It runs 4 services:
 3. flask server url: http://localhost:5000
 4. react front end url: http://localhost:5173
 
+to insert data, run
+```
+docker exec -it flask-backend python3 import_data.py
+```
 to cleanup containers
 ```
 docker-compose down --volumes --remove-orphans
