@@ -1,6 +1,5 @@
 [
   {
-    "_id": "txn_20250328_0001",
     "user_id": "user_001",
     "order_id": "order_00089",
     "items": [
@@ -38,7 +37,6 @@
     "submission_date": "2025-03-28T14:22:00Z"
   },
   {
-    "_id": "txn_00001",
     "user_id": "user_003",
     "order_id": "order_00001",
     "items": [
@@ -83,7 +81,6 @@
     "submission_date": "2025-03-28T15:00:00Z"
   },
   {
-    "_id": "txn_00002",
     "user_id": "user_006",
     "order_id": "order_00002",
     "items": [
@@ -121,7 +118,6 @@
     "submission_date": "2025-03-28T15:30:00Z"
   },
   {
-    "_id": "txn_00003",
     "user_id": "user_008",
     "order_id": "order_00003",
     "items": [
@@ -159,7 +155,6 @@
     "submission_date": "2025-03-28T16:00:00Z"
   },
   {
-    "_id": "txn_00004",
     "user_id": "user_010",
     "order_id": "order_00004",
     "items": [
@@ -197,7 +192,6 @@
     "submission_date": "2025-03-28T16:30:00Z"
   },
   {
-    "_id": "txn_00005",
     "user_id": "user_012",
     "order_id": "order_00005",
     "items": [
@@ -242,7 +236,6 @@
     "submission_date": "2025-03-28T17:00:00Z"
   },
   {
-    "_id": "txn_00006",
     "user_id": "user_014",
     "order_id": "order_00006",
     "items": [
@@ -280,7 +273,6 @@
     "submission_date": "2025-03-28T17:30:00Z"
   },
   {
-    "_id": "txn_00007",
     "user_id": "user_016",
     "order_id": "order_00007",
     "items": [
@@ -318,7 +310,6 @@
     "submission_date": "2025-03-28T18:00:00Z"
   },
   {
-    "_id": "txn_00008",
     "user_id": "user_018",
     "order_id": "order_00008",
     "items": [
@@ -356,7 +347,6 @@
     "submission_date": "2025-03-28T18:30:00Z"
   },
   {
-    "_id": "txn_00009",
     "user_id": "user_020",
     "order_id": "order_00009",
     "items": [
@@ -394,7 +384,6 @@
     "submission_date": "2025-03-28T19:00:00Z"
   },
   {
-    "_id": "txn_00010",
     "user_id": "user_001",
     "order_id": "order_00010",
     "items": [
@@ -432,7 +421,6 @@
     "submission_date": "2025-03-28T19:30:00Z"
   },
   {
-    "_id": "txn_00011",
     "user_id": "user_003",
     "order_id": "order_00011",
     "items": [
@@ -477,7 +465,6 @@
     "submission_date": "2025-03-28T20:00:00Z"
   },
   {
-    "_id": "txn_00012",
     "user_id": "user_006",
     "order_id": "order_00012",
     "items": [
@@ -515,7 +502,6 @@
     "submission_date": "2025-03-28T20:30:00Z"
   },
   {
-    "_id": "txn_00013",
     "user_id": "user_008",
     "order_id": "order_00013",
     "items": [
@@ -553,7 +539,6 @@
     "submission_date": "2025-03-28T21:00:00Z"
   },
   {
-    "_id": "txn_00014",
     "user_id": "user_010",
     "order_id": "order_00014",
     "items": [
@@ -591,7 +576,6 @@
     "submission_date": "2025-03-28T21:30:00Z"
   },
   {
-    "_id": "txn_00015",
     "user_id": "user_012",
     "order_id": "order_00015",
     "items": [
@@ -629,7 +613,6 @@
     "submission_date": "2025-03-28T22:00:00Z"
   },
   {
-    "_id": "txn_00016",
     "user_id": "user_014",
     "order_id": "order_00016",
     "items": [
@@ -667,7 +650,6 @@
     "submission_date": "2025-03-28T22:30:00Z"
   },
   {
-    "_id": "txn_00017",
     "user_id": "user_016",
     "order_id": "order_00017",
     "items": [
@@ -705,7 +687,6 @@
     "submission_date": "2025-03-28T23:00:00Z"
   },
   {
-    "_id": "txn_00018",
     "user_id": "user_018",
     "order_id": "order_00018",
     "items": [
@@ -743,7 +724,6 @@
     "submission_date": "2025-03-28T23:30:00Z"
   },
   {
-    "_id": "txn_00019",
     "user_id": "user_020",
     "order_id": "order_00019",
     "items": [

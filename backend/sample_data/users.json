@@ -1,6 +1,5 @@
 [
   {
-    "_id": "db_u123",
     "user_id": "u123",
     "name": "Foo Bar",
     "roles": "admin",
@@ -8,7 +7,6 @@
     "phone": "666666666"
   },
   {
-    "_id": "db_user_001",
     "user_id": "user_001",
     "name": "Alice Johnson",
     "roles": "buyer",
@@ -16,7 +14,6 @@
     "phone": "111-111-1111"
   },
   {
-    "_id": "db_user_002",
     "user_id": "user_002",
     "name": "Bob Smith",
     "roles": "seller",
@@ -24,7 +21,6 @@
     "phone": "222-222-2222"
   },
   {
-    "_id": "db_user_003",
     "user_id": "user_003",
     "name": "Charlie Davis",
     "roles": "buyer",
@@ -32,7 +28,6 @@
     "phone": "333-333-3333"
   },
   {
-    "_id": "db_user_004",
     "user_id": "user_004",
     "name": "Dana Lee",
     "roles": "seller",
@@ -40,7 +35,6 @@
     "phone": "444-444-4444"
   },
   {
-    "_id": "db_user_005",
     "user_id": "user_005",
     "name": "Evan Rodriguez",
     "roles": "admin",
@@ -48,7 +42,6 @@
     "phone": "555-555-5555"
   },
   {
-    "_id": "db_user_006",
     "user_id": "user_006",
     "name": "Fiona Garcia",
     "roles": "buyer",
@@ -56,7 +49,6 @@
     "phone": "666-666-6666"
   },
   {
-    "_id": "db_user_007",
     "user_id": "user_007",
     "name": "George Kim",
     "roles": "seller",
@@ -64,7 +56,6 @@
     "phone": "777-777-7777"
   },
   {
-    "_id": "db_user_008",
     "user_id": "user_008",
     "name": "Hannah Patel",
     "roles": "buyer",
@@ -72,7 +63,6 @@
     "phone": "888-888-8888"
   },
   {
-    "_id": "db_user_009",
     "user_id": "user_009",
     "name": "Ian Thompson",
     "roles": "seller",
@@ -80,7 +70,6 @@
     "phone": "999-999-9999"
   },
   {
-    "_id": "db_user_010",
     "user_id": "user_010",
     "name": "Julia Martinez",
     "roles": "buyer",
@@ -88,7 +77,6 @@
     "phone": "101-010-1010"
   },
   {
-    "_id": "db_user_011",
     "user_id": "user_011",
     "name": "Kevin Brown",
     "roles": "seller",
@@ -96,7 +84,6 @@
     "phone": "202-202-2020"
   },
   {
-    "_id": "db_user_012",
     "user_id": "user_012",
     "name": "Laura Wilson",
     "roles": "buyer",
@@ -104,7 +91,6 @@
     "phone": "303-303-3030"
   },
   {
-    "_id": "db_user_013",
     "user_id": "user_013",
     "name": "Michael Clark",
     "roles": "seller",
@@ -112,7 +98,6 @@
     "phone": "404-404-4040"
   },
   {
-    "_id": "db_user_014",
     "user_id": "user_014",
     "name": "Nina Rodriguez",
     "roles": "buyer",
@@ -120,7 +105,6 @@
     "phone": "505-505-5050"
   },
   {
-    "_id": "db_user_015",
     "user_id": "user_015",
     "name": "Oscar Hernandez",
     "roles": "seller",
@@ -128,7 +112,6 @@
     "phone": "606-606-6060"
   },
   {
-    "_id": "db_user_016",
     "user_id": "user_016",
     "name": "Paula Adams",
     "roles": "buyer",
@@ -136,7 +119,6 @@
     "phone": "707-707-7070"
   },
   {
-    "_id": "db_user_017",
     "user_id": "user_017",
     "name": "Quincy Evans",
     "roles": "seller",
@@ -144,7 +126,6 @@
     "phone": "808-808-8080"
   },
   {
-    "_id": "db_user_018",
     "user_id": "user_018",
     "name": "Rachel Green",
     "roles": "buyer",
@@ -152,7 +133,6 @@
     "phone": "909-909-9090"
   },
   {
-    "_id": "db_user_019",
     "user_id": "user_019",
     "name": "Samuel King",
     "roles": "seller",
@@ -160,7 +140,6 @@
     "phone": "010-010-0101"
   },
   {
-    "_id": "db_user_020",
     "user_id": "user_020",
     "name": "Tina Moore",
     "roles": "buyer",

@@ -37,31 +37,34 @@ Secure Online Marketplace (E-Commerce):
 
 ## MS1:
 ### Task 1: MongoDB Schema Design and Data Population(10 pts, ~3 hrs)
-- Define a document-based schema for the chosen application.
-- Minimum of 5 distinct collections with clear relationships.
-- At least 20 sample documents per collection that store main data/ transactions/relationships (not including collections used for type/categorization).
-- Store nested JSON data where applicable.
+- [x] Define a document-based schema for the chosen application.
+- [x] Minimum of 5 distinct collections with clear relationships.
+- [x] At least 20 sample documents per collection that store main data/ transactions/relationships (not including collections used for type/categorization).
+- [x] Store nested JSON data where applicable.
 
 Deliverables:
 1. Implementation codes: 
-    - (Kuo) MongoDB database setup
-    - (Xu) sample data population
+    - [x] (Kuo) MongoDB database setup
+    - [x] (Xu) sample data population
 
 2. Documentation:
-    1. (Weifan) page description of the project
-    2. (Raagini) Schema showing collections and relationships using example JSON documents for each collection
+    1. [x] (Weifan) page description of the project
+    2. [x] (Raagini) Schema showing collections and relationships using example JSON documents for each collection
 
-
-DOC location: https://docs.google.com/document/d/1exYK52GJdgID_IRjyN4bXN-ooOoBZFrecLefyAYfRbg/edit?usp=sharing
 
 ### Task 2: CRUD Operations & API Development (20 pts, ~5 hrs) 
-- Implement a REST API (Node.js, Express, or Flask) to interact with MongoDB.
+- [Kuo] Implement a REST API (Node.js, Express, or Flask) to interact with MongoDB.
 - Support full Create, Read, Update, Delete (CRUD) operations for at least 1 collection.
-- Implement secure authentication (JWT or Firebase Auth).
+    - [Xu] cart
+    - [Raagini] product
+- [Weifan] Implement secure authentication (JWT or Firebase Auth).
 
 Deliverables:
 Implementation codes: 
     - API source code with implementation of CRUD operations
 Documentation:
-    - README with setup instruction for the chosen framework and tools.
+    - [x] README with setup instruction for the chosen framework and tools.
     - API documentation with endpoints, request/response examples, and CRUD operations.
+        - (Kuo) [RESTAPI for backend](docs/BackendAPI.md)
+        - (Xu) [CRUD for cart](docs/CRUD_operations.md)
+        - (Raagini) [CRUD for product](docs/CRUD_operations.md)
