@@ -1,5 +1,6 @@
 [
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1a1"},
     "product_id": "prod_00123",
     "seller_id": "user_002",
     "name": "Minimalist Leather Backpack",
@@ -10,6 +11,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1a2"},
     "product_id": "prod_00001",
     "seller_id": "user_002",
     "name": "Ergonomic Office Chair",
@@ -20,6 +22,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1a3"},
     "product_id": "prod_00002",
     "seller_id": "user_004",
     "name": "Wireless Mouse",
@@ -30,6 +33,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1a4"},
     "product_id": "prod_00003",
     "seller_id": "user_007",
     "name": "Bluetooth Headphones",
@@ -40,6 +44,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1a5"},
     "product_id": "prod_00004",
     "seller_id": "user_009",
     "name": "Stainless Steel Water Bottle",
@@ -50,6 +55,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1a6"},
     "product_id": "prod_00005",
     "seller_id": "user_011",
     "name": "Cotton T-Shirt",
@@ -60,6 +66,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1a7"},
     "product_id": "prod_00006",
     "seller_id": "user_013",
     "name": "Running Shoes",
@@ -70,6 +77,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1a8"},
     "product_id": "prod_00007",
     "seller_id": "user_015",
     "name": "Smart Watch",
@@ -80,6 +88,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1a9"},
     "product_id": "prod_00008",
     "seller_id": "user_017",
     "name": "Desk Lamp",
@@ -90,6 +99,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1aa"},
     "product_id": "prod_00009",
     "seller_id": "user_019",
     "name": "Yoga Mat",
@@ -100,6 +110,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1ab"},
     "product_id": "prod_00010",
     "seller_id": "user_002",
     "name": "Sunglasses",
@@ -110,6 +121,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1ac"},
     "product_id": "prod_00011",
     "seller_id": "user_004",
     "name": "Leather Wallet",
@@ -120,6 +132,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1ad"},
     "product_id": "prod_00012",
     "seller_id": "user_007",
     "name": "Portable Charger",
@@ -130,6 +143,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1ae"},
     "product_id": "prod_00013",
     "seller_id": "user_009",
     "name": "Ceramic Mug",
@@ -140,6 +154,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1af"},
     "product_id": "prod_00014",
     "seller_id": "user_011",
     "name": "Backpack Organizer",
@@ -150,6 +165,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1b0"},
     "product_id": "prod_00015",
     "seller_id": "user_013",
     "name": "Wireless Earbuds",
@@ -160,6 +176,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1b1"},
     "product_id": "prod_00016",
     "seller_id": "user_015",
     "name": "Laptop Stand",
@@ -170,6 +187,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1b2"},
     "product_id": "prod_00017",
     "seller_id": "user_017",
     "name": "Digital Camera",
@@ -180,6 +198,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1b3"},
     "product_id": "prod_00018",
     "seller_id": "user_019",
     "name": "Fitness Tracker",
@@ -190,6 +209,7 @@
     ]
   },
   {
+    "_id": {"$oid": "60b9eb4c5c5f3a0015b9e1b4"},
     "product_id": "prod_00019",
     "seller_id": "user_002",
     "name": "Travel Pillow",
