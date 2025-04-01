@@ -1,21 +1,20 @@
 from flask import Blueprint, jsonify, request
 
 from src.models.order_model import *
-from src.utils import serialize_id
 
 order_bp = Blueprint("orders", __name__)
 
 
 @order_bp.route("/", methods=["GET"])
 def get_orders():
-    return jsonify([serialize_id(order) for order in find_all_orders()]), 200
+    return jsonify(find_all_orders()), 200
 
 
 @order_bp.route("/<string:order_id>", methods=["GET"])
 def get_order(order_id):
     order = find_order_by_id(order_id)
     if order:
-        return jsonify(serialize_id(order)), 200
+        return jsonify(order), 200
     return jsonify({"error": "Order not found"}), 404
 
 

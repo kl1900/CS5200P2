@@ -7,7 +7,6 @@ from src.models.user_model import (
     find_user_by_id,
     update_user,
 )
-from src.utils import serialize_id
 
 user_bp = Blueprint("users", __name__)
 
@@ -15,14 +14,14 @@ user_bp = Blueprint("users", __name__)
 @user_bp.route("/", methods=["GET"])
 def get_users():
     users = find_all_users()
-    return jsonify([serialize_id(user) for user in users]), 200
+    return jsonify(users), 200
 
 
 @user_bp.route("/<string:user_id>", methods=["GET"])
 def get_user(user_id):
     user = find_user_by_id(user_id)
     if user:
-        return jsonify(serialize_id(user)), 200
+        return jsonify(user), 200
     return jsonify({"error": "User not found"}), 404
 
 

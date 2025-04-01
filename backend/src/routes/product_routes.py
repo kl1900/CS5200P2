@@ -3,7 +3,6 @@ from dataclasses import asdict
 from flask import Blueprint, jsonify, request
 
 from src.models.product_model import *
-from src.utils import serialize_id
 
 product_bp = Blueprint("products", __name__)
 

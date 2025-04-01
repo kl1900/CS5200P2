@@ -1,21 +1,20 @@
 from flask import Blueprint, jsonify, request
 
 from src.models.cart_model import *
-from src.utils import serialize_id
 
 cart_bp = Blueprint("carts", __name__)
 
 
 @cart_bp.route("/", methods=["GET"])
 def get_carts():
-    return jsonify([serialize_id(cart) for cart in find_all_carts()]), 200
+    return jsonify(find_all_carts()), 200
 
 
 @cart_bp.route("/<string:cart_id>", methods=["GET"])
 def get_cart(cart_id):
     cart = find_cart_by_id(cart_id)
     if cart:
-        return jsonify(serialize_id(cart)), 200
+        return jsonify(cart), 200
     return jsonify({"error": "Cart not found"}), 404
 
 
