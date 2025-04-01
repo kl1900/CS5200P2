@@ -1,7 +1,12 @@
+import os
+
 from flask import Flask
+
 from src.extensions import mongo
 from src.routes.user_routes import user_bp
-import os
+from src.routes.cart_routes import cart_bp
+from src.routes.product_routes import product_bp
+from src.routes.order_routes import order_bp
 
 def create_app():
     app = Flask(__name__)
@@ -14,5 +19,8 @@ def create_app():
         return "Flask MongoDB API is running 🚀", 200
 
     app.register_blueprint(user_bp, url_prefix="/users")
+    app.register_blueprint(cart_bp, url_prefix="/carts")
+    app.register_blueprint(product_bp, url_prefix="/products")
+    app.register_blueprint(order_bp, url_prefix="/orders")
 
     return app
