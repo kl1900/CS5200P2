@@ -55,8 +55,8 @@ Deliverables:
 ### Task 2: CRUD Operations & API Development (20 pts, ~5 hrs) 
 - [Kuo] Implement a REST API (Node.js, Express, or Flask) to interact with MongoDB.
 - Support full Create, Read, Update, Delete (CRUD) operations for at least 1 collection (simple front end).
-    - [Xu] cart
-    - [Raagini] product
+    - [Xu] cart (buyer user)
+    - [Raagini] product (seller user)
 - [Weifan] Implement secure authentication (JWT or Firebase Auth).
 
 Deliverables:
