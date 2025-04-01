@@ -1,1 +1,1 @@
-"module to handle communication between db and data"
+"module to handle logic between db and data"

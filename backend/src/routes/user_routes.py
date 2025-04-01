@@ -1,16 +1,22 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify, request
+
 from src.models.user_model import (
-    find_all_users, find_user_by_id, create_user,
-    update_user, delete_user
+    create_user,
+    delete_user,
+    find_all_users,
+    find_user_by_id,
+    update_user,
 )
 from src.utils import serialize_id
 
 user_bp = Blueprint("users", __name__)
 
+
 @user_bp.route("/", methods=["GET"])
 def get_users():
     users = find_all_users()
     return jsonify([serialize_id(user) for user in users]), 200
+
 
 @user_bp.route("/<string:user_id>", methods=["GET"])
 def get_user(user_id):
@@ -18,6 +24,7 @@ def get_user(user_id):
     if user:
         return jsonify(serialize_id(user)), 200
     return jsonify({"error": "User not found"}), 404
+
 
 @user_bp.route("/", methods=["POST"])
 def create_user_route():
@@ -27,6 +34,7 @@ def create_user_route():
     create_user(data)
     return jsonify({"message": "User created"}), 201
 
+
 @user_bp.route("/<string:user_id>", methods=["PUT"])
 def update_user_route(user_id):
     data = request.json
@@ -34,6 +42,7 @@ def update_user_route(user_id):
     if result.matched_count:
         return jsonify({"message": "User updated"}), 200
     return jsonify({"error": "User not found"}), 404
+
 
 @user_bp.route("/<string:user_id>", methods=["DELETE"])
 def delete_user_route(user_id):
