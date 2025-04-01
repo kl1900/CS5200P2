@@ -42,6 +42,7 @@ def update_product_route(product_id):
 
 @product_bp.route("/<string:product_id>", methods=["DELETE"])
 def delete_product_route(product_id):
+    # TODO: remove all related data in carts
     result = delete_product(product_id)
     if result.deleted_count:
         return jsonify({"message": "Product deleted"}), 200
