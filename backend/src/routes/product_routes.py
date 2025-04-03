@@ -4,15 +4,19 @@ from flask import Blueprint, jsonify, request
 
 from src.models.product_model import *
 
+from src.jwt_utils import role_required
+
 product_bp = Blueprint("products", __name__)
 
 
 @product_bp.route("/", methods=["GET"])
+@role_required("view_products")
 def get_products():
     return jsonify([asdict(p) for p in find_all_products()]), 200
 
 
 @product_bp.route("/<string:product_id>", methods=["GET"])
+@role_required("view_products")
 def get_product(product_id):
     product = find_product_by_id(product_id)
     if product:
@@ -21,6 +25,7 @@ def get_product(product_id):
 
 
 @product_bp.route("/", methods=["POST"])
+@role_required("list_product")
 def create_product_route():
     data = request.json
     if find_product_by_id(data.get("product_id")):
@@ -32,6 +37,7 @@ def create_product_route():
 
 
 @product_bp.route("/<string:product_id>", methods=["PUT"])
+@role_required("edit_product")
 def update_product_route(product_id):
     data = request.get_json(force=True, silent=True)
     result = update_product(product_id, data)
@@ -41,6 +47,7 @@ def update_product_route(product_id):
 
 
 @product_bp.route("/<string:product_id>", methods=["DELETE"])
+@role_required("delete_product")
 def delete_product_route(product_id):
     # TODO: remove all related data in carts
     result = delete_product(product_id)

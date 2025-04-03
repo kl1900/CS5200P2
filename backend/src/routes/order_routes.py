@@ -2,15 +2,18 @@ from flask import Blueprint, jsonify, request
 
 from src.models.order_model import *
 
+from src.jwt_utils import role_required  # decorator
 order_bp = Blueprint("orders", __name__)
 
 
 @order_bp.route("/", methods=["GET"])
+@role_required("make_purchase")
 def get_orders():
     return jsonify(find_all_orders()), 200
 
 
 @order_bp.route("/<string:order_id>", methods=["GET"])
+@role_required("make_purchase")
 def get_order(order_id):
     order = find_order_by_id(order_id)
     if order:
@@ -19,6 +22,7 @@ def get_order(order_id):
 
 
 @order_bp.route("/", methods=["POST"])
+@role_required("make_purchase")
 def create_order_route():
     data = request.json
     if find_order_by_id(data.get("order_id")):
@@ -28,6 +32,7 @@ def create_order_route():
 
 
 @order_bp.route("/<string:order_id>", methods=["PUT"])
+@role_required("make_purchase")
 def update_order_route(order_id):
     data = request.json
     result = update_order(order_id, data)
@@ -37,6 +42,7 @@ def update_order_route(order_id):
 
 
 @order_bp.route("/<string:order_id>", methods=["DELETE"])
+@role_required("make_purchase")
 def delete_order_route(order_id):
     result = delete_order(order_id)
     if result.deleted_count:
