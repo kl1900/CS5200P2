@@ -1,6 +1,65 @@
 # CS5200P2
+## Authentication Testing
+
+Use POSTMAN or other API platform
+
+<u>Step 1: Login to Get a JWT</u>
+
+```bash
+POST http://localhost:5000/auth/login
+```
+
+**Body** → Choose `raw` → JSON:
+
+```json
+{
+  "email": "emma@example.com"
+}
+```
+
+ This user must have a `"roles"` field like `"admin"`, `"seller"`, or `"buyer"` (which in our database, there must be a role)
+
+
+
+<u>Step 2: Copy the Token</u>
+
+In Postman, save the token or use **"Environment Variables"** to store it (optional).
+
+
+
+<u>Step 3: Use Token to Call a Protected Route</u>
+
+For **each protected route**, include this in the request header:
+
+```makefile
+Authorization: Bearer <paste-your-token-here>
+```
+
+<u>Step 4: Admin Test — GET Users (Admin Only)</u>
+
+```bash
+GET http://localhost:5000/users/
+```
+
+**Header**:
+
+```sql
+
+Authorization: Bearer <admin-token>
+```
+
+Expected: 
+
+**200 with list of users** 
+
+403 if not admin
+
+
+
+Testing other routes if needed
 
 ## Setting up application
+
 Having docker installed.
 
 After git pulled this repo or unzipped this repo, open terminal
