@@ -24,10 +24,11 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1 {
@@ -65,4 +66,19 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+input[name="name"],
+input[name="price"],
+input[name="product_id"],
+button {
+  height: 40px;
+  font-size: 1rem;
+  padding: 0 1rem;
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  color: white;
+  box-sizing: border-box;
+  margin-right: 0.5rem;
+  vertical-align: middle;
 }
