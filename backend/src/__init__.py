@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask
+from flask_cors import CORS
 
 from src.extensions import mongo
 from src.routes.cart_routes import cart_bp
@@ -16,6 +17,8 @@ def create_app():
     )
 
     mongo.init_app(app)
+
+    CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 
     @app.route("/")
     def index():
