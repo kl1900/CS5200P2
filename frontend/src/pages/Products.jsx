@@ -18,24 +18,24 @@ function ProductPage() {
   
   // Fetch all products
   const fetchProducts = async () => {
+    const token = localStorage.getItem('token');
     try {
-      setLoading(true)
-      const res = await fetch(API_BASE)
-      
-      if (!res.ok) {
-        throw new Error(`API error: ${res.status}`)
-      }
-      
-      const data = await res.json()
-      setProducts(data)
-      setError(null)
+      setLoading(true);
+      const res = await fetch(API_BASE, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (!res.ok) throw new Error("Failed to fetch products");
+      const data = await res.json();
+      setProducts(data);
+      setError(null);
     } catch (err) {
-      console.error("Failed to fetch products:", err)
-      setError("Error loading products. Please try again.")
+      console.error(err);
+      setError(err.message);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
+  
   
   useEffect(() => {
     fetchProducts()
