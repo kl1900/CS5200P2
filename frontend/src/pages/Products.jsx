@@ -1,4 +1,3 @@
-// src/pages/Products.jsx
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
@@ -9,23 +8,32 @@ function ProductPage() {
     name: '', 
     price: '', 
     description: '',
-    seller_id: 'user_002' // Default seller ID
+    seller_id: 'user_002'
   })
   const [editId, setEditId] = useState(null)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
   const API_BASE = 'http://localhost:8000/products/'
-  
-  // Fetch all products
+
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem("jwt")
+    return {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    }
+  }
+
   const fetchProducts = async () => {
     try {
       setLoading(true)
-      const res = await fetch(API_BASE)
-      
+      const res = await fetch(API_BASE, {
+        headers: getAuthHeaders()
+      })
+
       if (!res.ok) {
         throw new Error(`API error: ${res.status}`)
       }
-      
+
       const data = await res.json()
       setProducts(data)
       setError(null)
@@ -36,41 +44,34 @@ function ProductPage() {
       setLoading(false)
     }
   }
-  
+
   useEffect(() => {
     fetchProducts()
   }, [])
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
   }
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    
-    // Prepare the form data with price as a number
-    const productData = {
-      ...form,
-      price: parseFloat(form.price)
-    }
-    
+    const productData = { ...form, price: parseFloat(form.price) }
     const method = editId ? 'PUT' : 'POST'
     const url = editId ? `${API_BASE}/${editId}` : API_BASE
-    
+
     try {
       const res = await fetch(url, {
         method,
-        headers: { 'Content-Type': 'application/json' },
+        headers: getAuthHeaders(),
         body: JSON.stringify(productData),
       })
-      
+
       if (!res.ok) {
         const errorData = await res.json()
         throw new Error(errorData.error || 'Unknown error occurred')
       }
-      
-      // Reset form and refresh product list
+
       setForm({ product_id: '', name: '', price: '', description: '', seller_id: 'user_002' })
       setEditId(null)
       fetchProducts()
@@ -80,18 +81,21 @@ function ProductPage() {
       setError(err.message || "Error saving product. Please try again.")
     }
   }
-  
+
   const handleDelete = async (id) => {
     if (!window.confirm('Delete this product?')) return
-    
+
     try {
-      const res = await fetch(`${API_BASE}/${id}`, { method: 'DELETE' })
-      
+      const res = await fetch(`${API_BASE}/${id}`, {
+        method: 'DELETE',
+        headers: getAuthHeaders(),
+      })
+
       if (!res.ok) {
         const errorData = await res.json()
         throw new Error(errorData.error || 'Failed to delete')
       }
-      
+
       fetchProducts()
       setError(null)
     } catch (err) {
@@ -99,7 +103,7 @@ function ProductPage() {
       setError(err.message || "Error deleting product. Please try again.")
     }
   }
-  
+
   const handleEdit = (product) => {
     setForm({
       product_id: product.product_id,
@@ -110,16 +114,16 @@ function ProductPage() {
     })
     setEditId(product.product_id)
   }
-  
+
   const handleCancel = () => {
     setForm({ product_id: '', name: '', price: '', description: '', seller_id: 'user_002' })
     setEditId(null)
   }
-  
+
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 15px' }}>
       <h1>Product Manager</h1>
-      
+
       {error && (
         <div style={{ 
           padding: '10px', 
@@ -131,7 +135,7 @@ function ProductPage() {
           {error}
         </div>
       )}
-      
+
       <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '15px' }}>
           <input
@@ -139,7 +143,7 @@ function ProductPage() {
             placeholder="Product ID"
             value={form.product_id}
             onChange={handleChange}
-            disabled={!!editId} // disable when editing
+            disabled={!!editId}
             required
           />
           <input
@@ -167,7 +171,7 @@ function ProductPage() {
             required
           />
         </div>
-        
+
         <div style={{ marginBottom: '15px' }}>
           <textarea
             name="description"
@@ -189,7 +193,7 @@ function ProductPage() {
             required
           />
         </div>
-        
+
         <div>
           <button type="submit">{editId ? 'Update' : 'Add'} Product</button>
           {editId && (
@@ -197,7 +201,7 @@ function ProductPage() {
           )}
         </div>
       </form>
-      
+
       {loading ? (
         <div>Loading products...</div>
       ) : (

@@ -1,7 +1,7 @@
 # CS5200P2
 
 ## Setting up application
-Having docker installed.
+Having docker
 
 After git pulled this repo or unzipped this repo, open terminal
 ```
