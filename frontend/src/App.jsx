@@ -11,7 +11,7 @@ function App() {
       <nav style={{ marginBottom: '1rem', padding: '1rem', backgroundColor: '#1a1a1a' }}>
         <Link to="/">Home</Link> |{' '}
         <Link to="/products">Products</Link> |{' '}
-        <Link to="/carts">Carts</Link>
+        <Link to="/carts">Carts</Link> |{' '}
         <Link to="/login">Login</Link> 
       </nav>
       <div style={{ padding: '0 1rem' }}>
