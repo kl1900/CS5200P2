@@ -8,16 +8,20 @@ from src.models.user_model import (
     update_user,
 )
 
+from src.jwt_utils import role_required
+
 user_bp = Blueprint("users", __name__)
 
 
 @user_bp.route("/", methods=["GET"])
+@role_required("manage_roles")
 def get_users():
     users = find_all_users()
     return jsonify(users), 200
 
 
 @user_bp.route("/<string:user_id>", methods=["GET"])
+@role_required("manage_roles")
 def get_user(user_id):
     user = find_user_by_id(user_id)
     if user:
@@ -26,6 +30,7 @@ def get_user(user_id):
 
 
 @user_bp.route("/", methods=["POST"])
+@role_required("manage_roles")
 def create_user_route():
     data = request.json
     if find_user_by_id(data.get("user_id")):
@@ -35,6 +40,7 @@ def create_user_route():
 
 
 @user_bp.route("/<string:user_id>", methods=["PUT"])
+@role_required("manage_roles")
 def update_user_route(user_id):
     data = request.json
     result = update_user(user_id, data)
@@ -44,6 +50,7 @@ def update_user_route(user_id):
 
 
 @user_bp.route("/<string:user_id>", methods=["DELETE"])
+@role_required("delete_user") 
 def delete_user_route(user_id):
     result = delete_user(user_id)
     if result.deleted_count:

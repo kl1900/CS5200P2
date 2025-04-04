@@ -25,3 +25,8 @@ def update_user(user_id, data):
 @clean_mongo_result
 def delete_user(user_id):
     return mongo.db.users.delete_one({"user_id": user_id})
+
+
+@clean_mongo_result
+def find_user_by_email(email):
+    return mongo.db.users.find_one({"email": email})
