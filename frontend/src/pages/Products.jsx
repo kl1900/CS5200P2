@@ -14,7 +14,7 @@ function ProductPage() {
   const [editId, setEditId] = useState(null)
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(true)
-  const API_BASE = 'http://localhost:8000/products/'
+  const API_BASE = 'http://localhost:8000/products'
   
   // Fetch all products
   const fetchProducts = async () => {
