@@ -50,33 +50,17 @@ def login():
         return jsonify({"token": token})
     return jsonify({"error": "Invalid credentials"}), 401
 
-@app.route('/products', methods=['GET'], strict_slashes=False)
+@app.route('/products', methods=['GET', 'OPTIONS'])
 def get_products():
-    products = list(db.products.find({}, {"_id": 0}))
-    return jsonify(products)
-
+    if request.method == 'OPTIONS':
+        # Handle preflight request
+        return jsonify({}), 200
+    try:
+        products = list(db.products.find({}, {"_id": 0}))
+        return jsonify(products), 200
+    except Exception as e:
+        app.logger.error(f"Error fetching products: {e}")
+        return jsonify({"error": "Internal server error"}), 500
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
-
-@app.route('/change_password', methods=['PUT'])
-def change_password():
-    # Here, you would typically verify the user identity.
-    token = request.headers.get('Authorization', '').split('Bearer ')[-1]
-    if not token:
-        return jsonify({"error": "Token missing"}), 401
-    try:
-        data = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-        user_id = data['user_id']
-    except Exception as e:
-        return jsonify({"error": str(e)}), 401
-
-    new_password = request.json.get('new_password')
-    if not new_password:
-        return jsonify({"error": "New password required"}), 400
-
-    new_hashed = bcrypt.hashpw(new_password.encode(), bcrypt.gensalt()).decode('utf-8')
-    result = db.users.update_one({"user_id": user_id}, {"$set": {"password": new_hashed}})
-    if result.modified_count == 1:
-        return jsonify({"message": "Password updated successfully."}), 200
-    return jsonify({"error": "Failed to update password."}), 500

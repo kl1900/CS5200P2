@@ -16,26 +16,24 @@ function ProductPage() {
   const [loading, setLoading] = useState(true)
   const API_BASE = 'http://localhost:8000/products'
   
-  // Fetch all products
+  // Fetch all products from public endpoint
   const fetchProducts = async () => {
-    const token = localStorage.getItem('token');
     try {
-      setLoading(true);
-      const res = await fetch(API_BASE, {
-        headers: { 'Authorization': `Bearer ${token}` }
-      });
-      if (!res.ok) throw new Error("Failed to fetch products");
-      const data = await res.json();
-      setProducts(data);
-      setError(null);
+      setLoading(true)
+      // No Authorization header is needed because the endpoint is public.
+      const res = await fetch(API_BASE)
+      if (!res.ok) throw new Error(`API error: ${res.status}`)
+      
+      const data = await res.json()
+      setProducts(data)
+      setError(null)
     } catch (err) {
-      console.error(err);
-      setError(err.message);
+      console.error("Failed to fetch products:", err)
+      setError("Error loading products. Please try again.")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
-  
+  }
   
   useEffect(() => {
     fetchProducts()
@@ -229,7 +227,9 @@ function ProductPage() {
               </tr>
             ))}
             {products.length === 0 && (
-              <tr><td colSpan="5" style={{ padding: '8px', textAlign: 'center' }}>No products available</td></tr>
+              <tr>
+                <td colSpan="5" style={{ padding: '8px', textAlign: 'center' }}>No products available</td>
+              </tr>
             )}
           </tbody>
         </table>
