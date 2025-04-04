@@ -25,7 +25,7 @@ def get_product(product_id):
 
 
 @product_bp.route("/", methods=["POST"])
-@role_required("list_product")
+@role_required("view_products") # used for testing purpose. Admin can list product with this setup
 def create_product_route():
     data = request.json
     if find_product_by_id(data.get("product_id")):
