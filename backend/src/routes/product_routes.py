@@ -1,17 +1,22 @@
 from dataclasses import asdict
+
 from flask import Blueprint, jsonify, request
 
 from src.models.product_model import *
+
+from src.jwt_utils import role_required
 
 product_bp = Blueprint("products", __name__)
 
 
 @product_bp.route("/", methods=["GET"])
+@role_required("view_products")
 def get_products():
     return jsonify([asdict(p) for p in find_all_products()]), 200
 
 
 @product_bp.route("/<string:product_id>", methods=["GET"])
+@role_required("view_products")
 def get_product(product_id):
     product = find_product_by_id(product_id)
     if product:
@@ -20,25 +25,19 @@ def get_product(product_id):
 
 
 @product_bp.route("/", methods=["POST"])
+@role_required("view_products") # used for testing purpose. Admin can list product with this setup
 def create_product_route():
     data = request.json
-    try:
-        # Check if product_id already exists
-        if "product_id" in data and find_product_by_id(data.get("product_id")):
-            return jsonify({"error": "Product ID already exists"}), 400
-        
-        # Create the product
-        new_product = create_product(data)
-        if new_product:
-            return jsonify(asdict(new_product)), 201
-        return jsonify({"error": "Failed to create product"}), 400
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
-    except Exception as e:
-        return jsonify({"error": f"Unexpected error: {str(e)}"}), 500
+    if find_product_by_id(data.get("product_id")):
+        return jsonify({"error": "Product ID already exists"}), 400
+    new_product = create_product(data)
+    if new_product:
+        return jsonify({"message": "Product created"}), 201
+    return jsonify({"message": "failed to create product"}), 400
 
 
 @product_bp.route("/<string:product_id>", methods=["PUT"])
+@role_required("edit_product")
 def update_product_route(product_id):
     data = request.get_json(force=True, silent=True)
     if not data:
@@ -57,6 +56,7 @@ def update_product_route(product_id):
 
 
 @product_bp.route("/<string:product_id>", methods=["DELETE"])
+@role_required("delete_product")
 def delete_product_route(product_id):
     # TODO: remove all related data in carts
     result = delete_product(product_id)
