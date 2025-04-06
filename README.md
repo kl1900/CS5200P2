@@ -117,6 +117,38 @@ Expected:
 
 Testing other routes if needed
 
+
+## MS2:
+
+### (Kuo Lu) Task 3: ACID operation
+- Use MongoDB’s ACID transactions for critical operations (e.g., checkout).
+- Demonstrate rollback mechanisms to handle failures. Compare transactions in
+MongoDB vs. MySQL (optional report).
+
+
+### (Weifan) Task 4: Role-Based Access Control (RBAC) & Security (20 pts, ~5 hrs)
+- Implement user roles (e.g., Admin, User).
+- Enforce access restrictions based on roles in database.
+   - implement access based on permissions
+   - e.g. seller can only see their own listed products
+- Prevent unauthorized data access with MongoDB security features.
+
+
+### (Raagini, by Wednesday) Task 5: Advanced MongoDB Queries & Aggregation (20 pts, ~5 hrs)
+- Implement at least 5 complex aggregation queries using $lookup, $group, $sort, $unwind, etc.
+   - Example:
+      - E-Commerce: Top-selling products, most active users
+
+- Document query purpose, implementation, and results
+
+
+# (Xu Tang) Task 6: Query Optimization & Indexing Strategy (10 pts, ~3 hrs) 
+- Benchmark at least 3 queries performance before/after indexing.
+- Explain why certain fields were indexed and how indexing improves speed.
+- Use Explain Plans to analyze query execution (MongoDB’s $explain).
+- Deliverable: A short report on performance before/after indexing, query optimization strategies used, the $explain result, and the reasons for improvement
+
+
 ## MS1:
 
 ### Task 1: MongoDB Schema Design and Data Population(10 pts, ~3 hrs)
