@@ -11,9 +11,7 @@ from src.routes.order_routes import order_bp
 
 def create_app():
     app = Flask(__name__)
-    app.config["MONGO_URI"] = os.environ.get(
-        "MONGO_URI", "mongodb://localhost:27017/mydb"
-    )
+    app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
     
     mongo.init_app(app)
     
