@@ -10,44 +10,84 @@ def clean_db(db):
         db.drop_collection(name)
 
 
-def test_checkout_succeeds(client, db):
-    user_id = "user_abc"
-    cart_id = "cart_xyz"
+def test_checkout_creates_complete_order(client, db):
+    user_id = "user_001"
+    cart_id = "cart_00089"
 
-    # No inventory setup needed (infinite stock model)
+    db.cart.insert_one({
+        "cart_id": cart_id,
+        "user_id": user_id,
+        "status": "active",
+        "items": [
+            {
+                "product_id": "prod_00015",
+                "name": "Wireless Earbuds",
+                "quantity": 1,
+                "price": 100.00
+            }
+        ]
+    })
 
-    db.cart.insert_one(
-        {
-            "cart_id": cart_id,
-            "user_id": user_id,
-            "status": "active",
-            "items": [
-                {
-                    "product_id": "prod_001",
-                    "name": "Earpods",
-                    "quantity": 2,
-                    "price": 99.99,
-                }
-            ],
+    response = client.post("/api/checkout", json={
+        "user_id": user_id,
+        "cart_id": cart_id,
+        "payment_method": "credit_card",
+        "billing_address": {
+            "name": "Foo bar",
+            "street": "example Lane",
+            "city": "Vancouver",
+            "state": "BC",
+            "zip": "",
+            "country": "Canada"
+        },
+        "shipping_address": {
+            "name": "Foo Bar",
+            "street": "example Lane",
+            "city": "Vancouver",
+            "state": "BC",
+            "zip": "",
+            "country": "Canada"
         }
-    )
-
-    response = client.post(
-        "/api/checkout", json={"user_id": user_id, "cart_id": cart_id}
-    )
+    })
 
     assert response.status_code == 200
     assert response.get_json()["message"] == "Checkout successful"
 
-    # Order created
-    assert db.orders.count_documents({"user_id": user_id}) == 1
+    # Validate order
     order = db.orders.find_one({"user_id": user_id})
-    assert order["items"][0]["product_id"] == "prod_001"
+    assert order is not None
 
-    # Old cart marked as checked_out
-    assert db.cart.find_one({"cart_id": cart_id})["status"] == "checked_out"
+    assert "order_id" in order
+    assert order["payment_method"] == "credit_card"
+    assert order["payment_status"] == "completed"
 
-    # New cart created with status active
+    # Financials
+    assert order["subtotal"] == 100.00
+    assert order["tax"] == 10.00
+    assert order["shipping_fee"] == 5.00
+    assert order["total"] == 115.00
+
+    # Items
+    assert len(order["items"]) == 1
+    item = order["items"][0]
+    assert item["product_id"] == "prod_00015"
+    assert item["unit_price"] == 100.00
+    assert item["subtotal"] == 100.00
+
+    # Addresses
+    assert order["billing_address"]["city"] == "Vancouver"
+    assert order["shipping_address"]["country"] == "Canada"
+
+    # Timestamps
+    for field in ["transaction_date", "submission_date"]:
+        assert field in order
+        assert order[field].endswith("Z")  # UTC format
+
+    # Cart should be checked_out
+    cart = db.cart.find_one({"cart_id": cart_id})
+    assert cart["status"] == "checked_out"
+
+    # New active cart exists
     new_cart = db.cart.find_one({"user_id": user_id, "status": "active"})
     assert new_cart is not None
     assert new_cart["items"] == []
@@ -57,51 +97,84 @@ def test_checkout_race_condition(client, db):
     user_id = "user_race"
     cart_id = "cart_race"
 
-    # Seed the shared cart
-    db.cart.insert_one(
-        {
-            "cart_id": cart_id,
-            "user_id": user_id,
-            "status": "active",
-            "items": [
-                {
-                    "product_id": "prod_race",
-                    "name": "Gaming Mouse",
-                    "quantity": 1,
-                    "price": 79.99,
-                }
-            ],
+    # Insert a shared cart for both threads
+    db.cart.insert_one({
+        "cart_id": cart_id,
+        "user_id": user_id,
+        "status": "active",
+        "items": [
+            {
+                "product_id": "prod_00015",
+                "name": "Wireless Earbuds",
+                "quantity": 1,
+                "price": 100.00
+            }
+        ]
+    })
+
+    checkout_payload = {
+        "user_id": user_id,
+        "cart_id": cart_id,
+        "payment_method": "credit_card",
+        "billing_address": {
+            "name": "Foo bar",
+            "street": "example Lane",
+            "city": "Vancouver",
+            "state": "BC",
+            "zip": "",
+            "country": "Canada"
+        },
+        "shipping_address": {
+            "name": "Foo Bar",
+            "street": "example Lane",
+            "city": "Vancouver",
+            "state": "BC",
+            "zip": "",
+            "country": "Canada"
         }
-    )
+    }
 
     results = [None, None]
 
-    def attempt_checkout(index):
-        res = client.post(
-            "/api/checkout", json={"user_id": user_id, "cart_id": cart_id}
-        )
-        results[index] = res
+    def run_checkout(index):
+        results[index] = client.post("/api/checkout", json=checkout_payload)
 
-    # Run 2 checkout requests "simultaneously"
+    # Simulate concurrent checkouts
     threads = [
-        threading.Thread(target=attempt_checkout, args=(0,)),
-        threading.Thread(target=attempt_checkout, args=(1,)),
+        threading.Thread(target=run_checkout, args=(0,)),
+        threading.Thread(target=run_checkout, args=(1,))
     ]
-    for t in threads:
-        t.start()
-    for t in threads:
-        t.join()
+    for t in threads: t.start()
+    for t in threads: t.join()
 
-    # One should succeed (200), one should fail (400)
-    statuses = [r.status_code for r in results]
-    assert sorted(statuses) == [200, 400]
+    # One should succeed, one should fail
+    status_codes = [r.status_code for r in results]
+    assert sorted(status_codes) == [200, 400]
 
     # Only one order should exist
-    assert db.orders.count_documents({"user_id": user_id}) == 1
+    orders = list(db.orders.find({"user_id": user_id}))
+    assert len(orders) == 1
 
-    # The original cart should be marked as checked_out
+    order = orders[0]
+
+    # Verify order structure
+    assert order["order_id"].startswith("order_")
+    assert order["payment_method"] == "credit_card"
+    assert order["payment_status"] == "completed"
+    assert order["subtotal"] == 100.00
+    assert order["tax"] == 10.00
+    assert order["shipping_fee"] == 5.00
+    assert order["total"] == 115.00
+    assert order["billing_address"]["city"] == "Vancouver"
+    assert order["shipping_address"]["country"] == "Canada"
+    assert order["transaction_date"].endswith("Z")
+    assert order["submission_date"].endswith("Z")
+
+    # Ensure cart is marked checked_out
     cart = db.cart.find_one({"cart_id": cart_id})
     assert cart["status"] == "checked_out"
 
-    # A new active cart should exist
-    assert db.cart.count_documents({"user_id": user_id, "status": "active"}) == 1
+    # New active cart should exist
+    new_cart = db.cart.find_one({"user_id": user_id, "status": "active"})
+    assert new_cart is not None
+    assert new_cart["items"] == []
