@@ -11,7 +11,12 @@ from src.routes.order_routes import order_bp
 
 def create_app():
     app = Flask(__name__)
-    app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+
+    # Default to 'mydb', or override with test env in tests
+    mongo_uri = os.environ.get("MONGO_URI", "mongodb://localhost:27017/")
+    db_name = os.environ.get("MONGO_DB_NAME", "mydb")
+
+    app.config["MONGO_URI"] = f"{mongo_uri}{db_name}?replicaSet=rs0"
     
     mongo.init_app(app)
     

@@ -5,7 +5,7 @@ from dateutil.parser import parse as parse_date
 
 from pymongo import InsertOne, MongoClient
 
-mongo_uri = os.environ.get("MONGO_URI", "mongodb://localhost:27017/mydb")
+mongo_uri = "mongodb://mongo:27017/mydb?replicaSet=rs0"
 client = MongoClient(mongo_uri)
 
 db = client.get_database()

@@ -1,6 +1,7 @@
 [
   {
     "cart_id": "cart_00123",
+    "status": "active",
     "user_id": "user_001",
     "items": [
       {
@@ -19,6 +20,7 @@
   },
   {
     "cart_id": "cart_00001",
+    "status": "active",
     "user_id": "user_003",
     "items": [
       {
@@ -37,6 +39,7 @@
   },
   {
     "cart_id": "cart_00002",
+    "status": "active",
     "user_id": "user_006",
     "items": [
       {
@@ -49,6 +52,7 @@
   },
   {
     "cart_id": "cart_00003",
+    "status": "active",
     "user_id": "user_008",
     "items": [
       {
@@ -67,6 +71,7 @@
   },
   {
     "cart_id": "cart_00004",
+    "status": "active",
     "user_id": "user_010",
     "items": [
       {
@@ -79,6 +84,7 @@
   },
   {
     "cart_id": "cart_00005",
+    "status": "active",
     "user_id": "user_012",
     "items": [
       {
@@ -91,6 +97,7 @@
   },
   {
     "cart_id": "cart_00006",
+    "status": "active",
     "user_id": "user_014",
     "items": [
       {
@@ -103,6 +110,7 @@
   },
   {
     "cart_id": "cart_00007",
+    "status": "active",
     "user_id": "user_016",
     "items": [
       {
@@ -115,6 +123,7 @@
   },
   {
     "cart_id": "cart_00008",
+    "status": "active",
     "user_id": "user_018",
     "items": [
       {
@@ -133,6 +142,7 @@
   },
   {
     "cart_id": "cart_00009",
+    "status": "active",
     "user_id": "user_020",
     "items": [
       {
@@ -145,6 +155,7 @@
   },
   {
     "cart_id": "cart_00010",
+    "status": "active",
     "user_id": "user_001",
     "items": [
       {
@@ -157,6 +168,7 @@
   },
   {
     "cart_id": "cart_00011",
+    "status": "active",
     "user_id": "user_003",
     "items": [
       {
@@ -169,6 +181,7 @@
   },
   {
     "cart_id": "cart_00012",
+    "status": "active",
     "user_id": "user_001",
     "items": [
       {
@@ -181,6 +194,7 @@
   },
   {
     "cart_id": "cart_00013",
+    "status": "active",
     "user_id": "user_003",
     "items": [
       {
@@ -193,6 +207,7 @@
   },
   {
     "cart_id": "cart_00014",
+    "status": "active",
     "user_id": "user_006",
     "items": [
       {
@@ -205,6 +220,7 @@
   },
   {
     "cart_id": "cart_00015",
+    "status": "active",
     "user_id": "user_008",
     "items": [
       {
@@ -217,6 +233,7 @@
   },
   {
     "cart_id": "cart_00016",
+    "status": "active",
     "user_id": "user_010",
     "items": [
       {
@@ -229,6 +246,7 @@
   },
   {
     "cart_id": "cart_00017",
+    "status": "active",
     "user_id": "user_012",
     "items": [
       {
@@ -241,6 +259,7 @@
   },
   {
     "cart_id": "cart_00018",
+    "status": "active",
     "user_id": "user_014",
     "items": [
       {
@@ -253,6 +272,7 @@
   },
   {
     "cart_id": "cart_00019",
+    "status": "active",
     "user_id": "user_016",
     "items": [
       {
@@ -265,6 +285,7 @@
   },
   {
     "cart_id": "cart_00020",
+    "status": "active",
     "user_id": "user_020",
     "items": [
       {

@@ -46,7 +46,8 @@ services:
     volumes:
       - ./backend:/app
     environment:
-      - MONGO_URI=mongodb://mongo:27017/mydb?replicaSet=rs0
+      - MONGO_URI=mongodb://mongo:27017/
+      - PYTHONPATH=/app
     depends_on:
       - mongo
 
