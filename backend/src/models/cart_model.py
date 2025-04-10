@@ -6,9 +6,12 @@ from src.utils import clean_mongo_result
 def find_all_carts():
     return list(get_db().carts.find())
 
+@clean_mongo_result
+def find_cart_by_user_id(cart_id):
+    return get_db().carts.find({"user_id": cart_id})
 
 @clean_mongo_result
-def find_cart_by_id(cart_id):
+def find_cart_by_cart_id(cart_id):
     return get_db().carts.find_one({"cart_id": cart_id})
 
 

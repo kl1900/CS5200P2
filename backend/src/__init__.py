@@ -5,7 +5,7 @@ from flask_cors import CORS
 import os
 
 from src.routes.cart_routes import cart_bp
-from src.routes.checkout_routes import checkout_bp
+from src.routes.api_routes import api_bp
 from src.routes.order_routes import order_bp
 # Import all your blueprints
 from src.routes.product_routes import product_bp
@@ -51,6 +51,6 @@ def create_app():
     app.register_blueprint(cart_bp, url_prefix="/carts")
     app.register_blueprint(product_bp, url_prefix="/products")
     app.register_blueprint(order_bp, url_prefix="/orders")
-    app.register_blueprint(checkout_bp)
+    app.register_blueprint(api_bp)
 
     return app
