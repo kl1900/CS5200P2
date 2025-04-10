@@ -4,6 +4,7 @@ import ProductPage from './pages/Products'
 import ProductDetail from './components/ProductDetail'
 import LoginPage from "./pages/LoginPage"
 import CartPage from './pages/Carts'
+import Analytics from './pages/Analytics'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Link to="/">Home</Link> |{' '}
         <Link to="/products">Products</Link> |{' '}
         <Link to="/carts">Carts</Link> |{' '}
+        <Link to="/analytics">Analytics</Link> |{' '}
         <Link to="/login">Login</Link> 
       </nav>
       <div style={{ padding: '0 1rem' }}>
@@ -21,6 +23,7 @@ function App() {
           <Route path="/products" element={<ProductPage />} />
           <Route path="/products/:id" element={<ProductDetail />} />
           <Route path="/carts" element={<CartPage />} />
+          <Route path="/analytics" element={<Analytics />} />
         </Routes>
       </div>
     </div>
