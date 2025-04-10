@@ -83,7 +83,8 @@ def revenue_by_seller():
             "_id": 0,
             "sellerName": "$seller.name",
             "totalRevenue": 1
-        }}
+        }},
+        {"$sort": {"totalRevenue": -1}}
     ]
     result = list(mongo.db.orders.aggregate(pipeline))
     return jsonify(result)
@@ -116,9 +117,11 @@ def most_carted_products():
 
 @analytics_bp.route("/analytics/orders-last-7-days", methods=["GET"])
 def orders_last_7_days():
-    seven_days_ago = datetime.utcnow() - timedelta(days=7)
+    now = datetime.utcnow()
+    start_of_today = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    seven_days_ago = now.replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=7)
     pipeline = [
-        {"$match": {"transaction_date": {"$gte": seven_days_ago}}},
+        {"$match": {"transaction_date": {"$gte": seven_days_ago, "$lt": start_of_today}}},
         {"$group": {
             "_id": {"$dateToString": {"format": "%Y-%m-%d", "date": "$transaction_date"}},
             "count": {"$sum": 1}
