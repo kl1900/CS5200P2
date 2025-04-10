@@ -2,6 +2,13 @@
 
 from functools import wraps
 
+from flask import current_app
+
+def get_db():
+    db_name = current_app.config["MONGO_DB_NAME"]
+    client = current_app.mongo_client
+    return client[db_name]
+
 
 def clean_mongo_doc(doc):
     "remove '_id' from mongo data"

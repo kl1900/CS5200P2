@@ -2,26 +2,23 @@ import os
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import os
 
-from src.extensions import mongo
 from src.routes.cart_routes import cart_bp
 from src.routes.checkout_routes import checkout_bp
 from src.routes.order_routes import order_bp
 # Import all your blueprints
 from src.routes.product_routes import product_bp
 from src.routes.user_routes import user_bp
+from pymongo import MongoClient
 
+mongo_uri = os.environ.get("MONGO_URI", "mongodb://localhost:27017/")
+mongo_client = MongoClient(f"{mongo_uri}?replicaSet=rs0")
 
 def create_app():
     app = Flask(__name__)
-
-    # Default to 'mydb', or override with test env in tests
-    mongo_uri = os.environ.get("MONGO_URI", "mongodb://localhost:27017/")
-    db_name = os.environ.get("MONGO_DB_NAME", "mydb")
-
-    app.config["MONGO_URI"] = f"{mongo_uri}{db_name}?replicaSet=rs0"
-
-    mongo.init_app(app)
+    app.config["MONGO_DB_NAME"] = os.getenv("MONGO_DB_NAME", "mydb")
+    app.mongo_client = mongo_client
 
     # Enable CORS for all routes
     CORS(app)
