@@ -17,6 +17,9 @@ function ProductPage() {
   const [loading, setLoading] = useState(true)
   const API_BASE = 'http://localhost:8000/products/'
 
+  const role = getUserRole()
+  const isBuyer = role === 'buyer'
+
   const getAuthHeaders = () => {
     const token = localStorage.getItem("jwt")
     return {
@@ -138,6 +141,7 @@ function ProductPage() {
         </div>
       )}
 
+      {!isBuyer && (
       <form onSubmit={handleSubmit} style={{ marginBottom: '2rem' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginBottom: '15px' }}>
           <input
@@ -195,7 +199,8 @@ function ProductPage() {
             required
           />
         </div>
-
+        
+        
         <div>
           <button type="submit">{editId ? 'Update' : 'Add'} Product</button>
           {editId && (
@@ -203,6 +208,7 @@ function ProductPage() {
           )}
         </div>
       </form>
+      )}
 
       {loading ? (
         <div>Loading products...</div>
@@ -228,10 +234,16 @@ function ProductPage() {
                 <td style={{ padding: '8px' }}>
                   {p.description ? p.description.substring(0, 50) + (p.description.length > 50 ? '...' : '') : ''}
                 </td>
+                
                 <td style={{ padding: '8px' }}>
-                  <button onClick={() => handleEdit(p)} style={{ marginRight: '5px' }}>Edit</button>
-                  <button onClick={() => handleDelete(p.product_id)}>Delete</button>
+                  {!isBuyer && (
+                    <>
+                      <button onClick={() => handleEdit(p)} style={{ marginRight: '5px' }}>Edit</button>
+                      <button onClick={() => handleDelete(p.product_id)}>Delete</button>
+                    </>
+                  )}
                 </td>
+
               </tr>
             ))}
             {products.length === 0 && (
