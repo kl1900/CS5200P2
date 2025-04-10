@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { getUserRole } from '../utils/auth'
+
 
 function ProductPage() {
   const [products, setProducts] = useState([])

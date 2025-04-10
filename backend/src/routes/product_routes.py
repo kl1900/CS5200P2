@@ -12,7 +12,9 @@ product_bp = Blueprint("products", __name__)
 @product_bp.route("/", methods=["GET"])
 @role_required("view_products")
 def get_products():
-    return jsonify([asdict(p) for p in find_all_products()]), 200
+    current_user = request.current_user
+    products = find_all_products(current_user=current_user)
+    return jsonify([asdict(p) for p in products]), 200
 
 
 @product_bp.route("/<string:product_id>", methods=["GET"])

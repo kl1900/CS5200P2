@@ -21,9 +21,22 @@ class Product:
         )
 
 
-def find_all_products() -> List[Product]:
+def find_all_products(current_user=None) -> List[Product]:
     all_products = []
-    for p in mongo.db.products.find():
+    # Default: return all products unless filtering is needed
+    query = {}
+
+    if current_user:
+        role = current_user.get("roles")
+        user_id = current_user.get("user_id")
+
+        if role == "seller":
+            # Only return products listed by the seller
+            query["seller_id"] = user_id
+
+        # Maybe for the buyer here too if later needed
+
+    for p in mongo.db.products.find(query):
         p = clean_mongo_doc(p)
         all_products.append(Product(**p))
     return all_products
