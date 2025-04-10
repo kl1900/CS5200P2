@@ -5,6 +5,7 @@ import ProductDetail from './components/ProductDetail'
 import LoginPage from "./pages/LoginPage"
 import ProtectedRoute from './components/ProtectedRoute'
 import CartPage from './pages/Carts'
+import Analytics from './pages/Analytics'
 
 const isLoggedIn = !!localStorage.getItem("jwt")
 
@@ -21,6 +22,7 @@ function App() {
         <Link to="/">Home</Link> |{' '}
         <Link to="/products">Products</Link> |{' '}
         <Link to="/carts">Carts</Link> {' '}
+        <Link to="/analytics">Analytics</Link> |{' '}
         {!isLoggedIn && (
           <>
             {' | '}
@@ -45,9 +47,10 @@ function App() {
         <Routes>
           <Route path="/" element={<h2>Welcome to the Dashboard</h2>} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/products" element={<ProtectedRoute><ProductPage /> </ProtectedRoute>} />
-          <Route path="/products/:id" element={<ProtectedRoute> <ProductDetail /> </ProtectedRoute>}  />
-          <Route path="/carts" element={<ProtectedRoute> <CartPage /> </ProtectedRoute>} />
+          <Route path="/products" element={<ProductPage />} />
+          <Route path="/products/:id" element={<ProductDetail />} />
+          <Route path="/carts" element={<CartPage />} />
+          <Route path="/analytics" element={<Analytics />} />
         </Routes>
       </div>
     </div>
