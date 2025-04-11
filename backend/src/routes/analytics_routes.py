@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from src.extensions import mongo
+from src.db import get_db
 from datetime import datetime, timedelta
 
 analytics_bp = Blueprint("analytics", __name__)
@@ -7,6 +7,7 @@ thirty_days_ago = datetime.utcnow() - timedelta(days=30)
 
 @analytics_bp.route("/analytics/top-products", methods=["GET"])
 def top_products():
+    db = get_db()
     pipeline = [
         {"$match": {"transaction_date": {"$gte": thirty_days_ago}}},
         {"$unwind": "$items"},
@@ -29,11 +30,12 @@ def top_products():
             "totalSold": 1
         }}
     ]
-    result = list(mongo.db.orders.aggregate(pipeline))
+    result = list(db.orders.aggregate(pipeline))
     return jsonify(result)
 
 @analytics_bp.route("/analytics/most-active-buyers", methods=["GET"])
 def most_active_buyers():
+    db = get_db()
     pipeline = [
         {"$match": {
             "transaction_date": {"$gte": thirty_days_ago}
@@ -57,11 +59,12 @@ def most_active_buyers():
             "totalOrders": 1
         }}
     ]
-    result = list(mongo.db.orders.aggregate(pipeline))
+    result = list(db.orders.aggregate(pipeline))
     return jsonify(result)
 
 @analytics_bp.route("/analytics/revenue-by-seller", methods=["GET"])
 def revenue_by_seller():
+    db = get_db()
     pipeline = [
         {"$unwind": "$items"},
         {"$lookup": {
@@ -91,11 +94,12 @@ def revenue_by_seller():
         }},
         {"$sort": {"totalRevenue": -1}}
     ]
-    result = list(mongo.db.orders.aggregate(pipeline))
+    result = list(db.orders.aggregate(pipeline))
     return jsonify(result)
 
 @analytics_bp.route("/analytics/most-carted-products", methods=["GET"])
 def most_carted_products():
+    db = get_db()
     pipeline = [
         {"$unwind": "$items"},
         {"$group": {
@@ -117,11 +121,12 @@ def most_carted_products():
             "cartCount": 1
         }}
     ]
-    result = list(mongo.db.carts.aggregate(pipeline))
+    result = list(db.carts.aggregate(pipeline))
     return jsonify(result)
 
 @analytics_bp.route("/analytics/orders-last-7-days", methods=["GET"])
 def orders_last_7_days():
+    db = get_db()
     now = datetime.utcnow()
     start_of_today = now.replace(hour=0, minute=0, second=0, microsecond=0)
     seven_days_ago = now.replace(hour=0, minute=0, second=0, microsecond=0) - timedelta(days=7)
@@ -133,5 +138,5 @@ def orders_last_7_days():
         }},
         {"$sort": {"_id": 1}}
     ]
-    result = list(mongo.db.orders.aggregate(pipeline))
+    result = list(db.orders.aggregate(pipeline))
     return jsonify(result)

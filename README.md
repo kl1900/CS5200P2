@@ -20,10 +20,11 @@ It runs 4 services:
 
 1. mongo
 2. mongo-express (mongodb admin) url: http://localhost:8081
-   - usrname `admin`
+   - username `admin`
    - password `5200`
 3. flask server url: http://localhost:8000
 4. react front end url: http://localhost:5173
+   - login with username `admin@example.com`
 
 to insert data, run
 
