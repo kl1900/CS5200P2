@@ -1,7 +1,7 @@
 from dataclasses import asdict, dataclass, field
 from typing import List, Optional
 
-from src.extensions import mongo
+from src.db import get_db
 from src.utils import clean_mongo_doc
 
 
@@ -16,21 +16,34 @@ class Product:
     
     def save(self):
         "save current data into database"
-        return mongo.db.products.update_one(
+        return get_db().products.update_one(
             {"product_id": self.product_id}, {"$set": asdict(self)}, upsert=True
         )
 
 
-def find_all_products() -> List[Product]:
+def find_all_products(current_user=None) -> List[Product]:
     all_products = []
-    for p in mongo.db.products.find():
+    # Default: return all products unless filtering is needed
+    query = {}
+
+    if current_user:
+        role = current_user.get("roles")
+        user_id = current_user.get("user_id")
+
+        if role == "seller":
+            # Only return products listed by the seller
+            query["seller_id"] = user_id
+
+        # Maybe for the buyer here too if later needed
+
+    for p in get_db().products.find():
         p = clean_mongo_doc(p)
         all_products.append(Product(**p))
     return all_products
 
 
 def find_product_by_id(product_id) -> Optional[Product]:
-    p = mongo.db.products.find_one({"product_id": product_id})
+    p = get_db().products.find_one({"product_id": product_id})
     if not p:
         return None
     return Product(**clean_mongo_doc(p))
@@ -51,8 +64,8 @@ def create_product(data) -> Product:
     if "images" not in data:
         data["images"] = []
     
-    result = mongo.db.products.insert_one(data)
-    p = mongo.db.products.find_one({"_id": result.inserted_id})
+    result = get_db().products.insert_one(data)
+    p = get_db().products.find_one({"_id": result.inserted_id})
     return Product(**clean_mongo_doc(p))
 
 
@@ -60,7 +73,7 @@ def update_product(product_id, data):
     # Get existing product
     product = find_product_by_id(product_id)
     if not product:
-        return mongo.db.products.update_one({"product_id": "nonexistent"}, {"$set": {}})
+        return get_db().products.update_one({"product_id": "nonexistent"}, {"$set": {}})
     
     # Convert price to float if it's a string
     if "price" in data and isinstance(data["price"], str):
@@ -75,4 +88,4 @@ def update_product(product_id, data):
 
 
 def delete_product(product_id):
-    return mongo.db.products.delete_one({"product_id": product_id})
+    return get_db().products.delete_one({"product_id": product_id})

@@ -1,15 +1,25 @@
 import json
 import os
 from pathlib import Path
+from dateutil.parser import parse as parse_date
 
 from pymongo import InsertOne, MongoClient
 
-mongo_uri = os.environ.get("MONGO_URI", "mongodb://localhost:27017/mydb")
+mongo_uri = "mongodb://mongo:27017/mydb?replicaSet=rs0"
 client = MongoClient(mongo_uri)
 
 db = client.get_database()
 
 sample_data = Path(__file__).parent / "sample_data"
+
+def parse_dates(doc):
+    for key, value in doc.items():
+        if isinstance(value, str) and "date" in key.lower() and value.endswith("Z"):
+            try:
+                doc[key] = parse_date(value)
+            except Exception:
+                pass
+    return doc
 
 for json_f in sample_data.glob("*.json"):
     collection_name = json_f.stem  # Strip extension for collection name
@@ -20,6 +30,7 @@ for json_f in sample_data.glob("*.json"):
 
     # Accept list of docs or single doc
     docs = data if isinstance(data, list) else [data]
+    docs = [parse_dates(doc) for doc in docs]
     ops = [InsertOne(doc) for doc in docs]
 
     if ops:

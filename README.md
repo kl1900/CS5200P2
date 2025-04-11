@@ -20,10 +20,11 @@ It runs 4 services:
 
 1. mongo
 2. mongo-express (mongodb admin) url: http://localhost:8081
-   - usrname `admin`
+   - username `admin`
    - password `5200`
 3. flask server url: http://localhost:8000
 4. react front end url: http://localhost:5173
+   - login with username `admin@example.com`
 
 to insert data, run
 
@@ -54,7 +55,7 @@ Please visit http://localhost:5173/ for frontend page. There is a role-based aut
 
 For example, 
 
-emma@example.com is an admin, which has all the permission to edit, add, delete, update products.  There will be more features available exclusively to admin later.
+admin@example.com is an admin, which has all the permission to edit, add, delete, update products.  There will be more features available exclusively to admin later.
 
 alice@example.com is a buyer, which can not be doing any CRUD operation in our current page.
 
@@ -117,16 +118,27 @@ Expected:
 
 Testing other routes if needed
 
+## ACID testing
+- Use MongoDB’s ACID transactions for critical operations (e.g., checkout).
+   - This is done via pymongo's session feature see [here](backend/src/routes/api_routes.py?plain=1#L117)
+- Demonstrate rollback mechanisms to handle failures. Compare transactions in
+MongoDB vs. MySQL (optional report).
+   - There are python test to demonstrate this feature. See [here](backend/tests/checkout_acid_test.py) The tests covers 3 different scenarios.
+   - command to run pytest:
+```
+docker exec -it flask-backend pytest
+```
+
 
 ## MS2:
 
-### (Kuo Lu) Task 3: ACID operation
+### Task 3: ACID operation
 - Use MongoDB’s ACID transactions for critical operations (e.g., checkout).
 - Demonstrate rollback mechanisms to handle failures. Compare transactions in
 MongoDB vs. MySQL (optional report).
 
 
-### (Weifan) Task 4: Role-Based Access Control (RBAC) & Security (20 pts, ~5 hrs)
+### Task 4: Role-Based Access Control (RBAC) & Security (20 pts, ~5 hrs)
 - Implement user roles (e.g., Admin, User).
 - Enforce access restrictions based on roles in database.
    - implement access based on permissions
@@ -134,7 +146,7 @@ MongoDB vs. MySQL (optional report).
 - Prevent unauthorized data access with MongoDB security features.
 
 
-### (Raagini, by Wednesday) Task 5: Advanced MongoDB Queries & Aggregation (20 pts, ~5 hrs)
+### Task 5: Advanced MongoDB Queries & Aggregation (20 pts, ~5 hrs)
 - Implement at least 5 complex aggregation queries using $lookup, $group, $sort, $unwind, etc.
    - Example:
       - E-Commerce: Top-selling products, most active users
@@ -142,11 +154,12 @@ MongoDB vs. MySQL (optional report).
 - Document query purpose, implementation, and results
 
 
-# (Xu Tang) Task 6: Query Optimization & Indexing Strategy (10 pts, ~3 hrs) 
+### Task 6: Query Optimization & Indexing Strategy (10 pts, ~3 hrs) (docs/Indexing Strategy and Benchmark Report)
 - Benchmark at least 3 queries performance before/after indexing.
 - Explain why certain fields were indexed and how indexing improves speed.
 - Use Explain Plans to analyze query execution (MongoDB’s $explain).
 - Deliverable: A short report on performance before/after indexing, query optimization strategies used, the $explain result, and the reasons for improvement
+
 
 
 ## MS1:

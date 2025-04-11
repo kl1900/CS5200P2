@@ -1,43 +1,46 @@
 [
   {
     "cart_id": "cart_00123",
-    "user_id": "user_001",
+    "status": "active",
+    "user_id": "u123",
     "items": [
       {
         "product_id": "prod_00002",
         "name": "Wireless Mouse",
         "quantity": 2,
-        "price": 25.00
+        "price": 25.0
       },
       {
         "product_id": "prod_00016",
         "name": "Laptop Stand",
         "quantity": 1,
-        "price": 40.00
+        "price": 40.0
       }
     ]
   },
   {
     "cart_id": "cart_00001",
-    "user_id": "user_003",
+    "status": "active",
+    "user_id": "user_001",
     "items": [
       {
         "product_id": "prod_00010",
         "name": "Sunglasses",
         "quantity": 1,
-        "price": 50.00
+        "price": 50.0
       },
       {
         "product_id": "prod_00002",
         "name": "Wireless Mouse",
         "quantity": 2,
-        "price": 25.00
+        "price": 25.0
       }
     ]
   },
   {
     "cart_id": "cart_00002",
-    "user_id": "user_006",
+    "status": "active",
+    "user_id": "user_002",
     "items": [
       {
         "product_id": "prod_00005",
@@ -49,37 +52,40 @@
   },
   {
     "cart_id": "cart_00003",
-    "user_id": "user_008",
+    "status": "active",
+    "user_id": "user_003",
     "items": [
       {
         "product_id": "prod_00009",
         "name": "Yoga Mat",
         "quantity": 1,
-        "price": 40.00
+        "price": 40.0
       },
       {
         "product_id": "prod_00012",
         "name": "Portable Charger",
         "quantity": 1,
-        "price": 30.00
+        "price": 30.0
       }
     ]
   },
   {
     "cart_id": "cart_00004",
-    "user_id": "user_010",
+    "status": "active",
+    "user_id": "user_004",
     "items": [
       {
         "product_id": "prod_00016",
         "name": "Laptop Stand",
         "quantity": 1,
-        "price": 40.00
+        "price": 40.0
       }
     ]
   },
   {
     "cart_id": "cart_00005",
-    "user_id": "user_012",
+    "status": "active",
+    "user_id": "user_005",
     "items": [
       {
         "product_id": "prod_00007",
@@ -91,169 +97,183 @@
   },
   {
     "cart_id": "cart_00006",
-    "user_id": "user_014",
+    "status": "active",
+    "user_id": "user_006",
     "items": [
       {
         "product_id": "prod_00011",
         "name": "Leather Wallet",
         "quantity": 2,
-        "price": 45.00
+        "price": 45.0
       }
     ]
   },
   {
     "cart_id": "cart_00007",
-    "user_id": "user_016",
+    "status": "active",
+    "user_id": "user_007",
     "items": [
       {
         "product_id": "prod_00003",
         "name": "Bluetooth Headphones",
         "quantity": 1,
-        "price": 150.00
+        "price": 150.0
       }
     ]
   },
   {
     "cart_id": "cart_00008",
-    "user_id": "user_018",
+    "status": "active",
+    "user_id": "user_008",
     "items": [
       {
         "product_id": "prod_00015",
         "name": "Wireless Earbuds",
         "quantity": 1,
-        "price": 100.00
+        "price": 100.0
       },
       {
         "product_id": "prod_00019",
         "name": "Travel Pillow",
         "quantity": 1,
-        "price": 28.00
+        "price": 28.0
       }
     ]
   },
   {
     "cart_id": "cart_00009",
-    "user_id": "user_020",
+    "status": "active",
+    "user_id": "user_009",
     "items": [
       {
         "product_id": "prod_00008",
         "name": "Desk Lamp",
         "quantity": 1,
-        "price": 35.50
+        "price": 35.5
       }
     ]
   },
   {
     "cart_id": "cart_00010",
-    "user_id": "user_001",
-    "items": [
-      {
-        "product_id": "prod_00014",
-        "name": "Backpack Organizer",
-        "quantity": 1,
-        "price": 22.50
-      }
-    ]
-  },
-  {
-    "cart_id": "cart_00011",
-    "user_id": "user_003",
-    "items": [
-      {
-        "product_id": "prod_00006",
-        "name": "Running Shoes",
-        "quantity": 1,
-        "price": 75.00
-      }
-    ]
-  },
-  {
-    "cart_id": "cart_00012",
-    "user_id": "user_001",
-    "items": [
-      {
-        "product_id": "prod_00013",
-        "name": "Ceramic Mug",
-        "quantity": 4,
-        "price": 18.00
-      }
-    ]
-  },
-  {
-    "cart_id": "cart_00013",
-    "user_id": "user_003",
-    "items": [
-      {
-        "product_id": "prod_00017",
-        "name": "Digital Camera",
-        "quantity": 1,
-        "price": 350.00
-      }
-    ]
-  },
-  {
-    "cart_id": "cart_00014",
-    "user_id": "user_006",
-    "items": [
-      {
-        "product_id": "prod_00004",
-        "name": "Stainless Steel Water Bottle",
-        "quantity": 2,
-        "price": 20.00
-      }
-    ]
-  },
-  {
-    "cart_id": "cart_00015",
-    "user_id": "user_008",
-    "items": [
-      {
-        "product_id": "prod_00018",
-        "name": "Fitness Tracker",
-        "quantity": 1,
-        "price": 60.00
-      }
-    ]
-  },
-  {
-    "cart_id": "cart_00016",
+    "status": "active",
     "user_id": "user_010",
     "items": [
       {
         "product_id": "prod_00014",
         "name": "Backpack Organizer",
         "quantity": 1,
-        "price": 22.50
+        "price": 22.5
+      }
+    ]
+  },
+  {
+    "cart_id": "cart_00011",
+    "status": "active",
+    "user_id": "user_011",
+    "items": [
+      {
+        "product_id": "prod_00006",
+        "name": "Running Shoes",
+        "quantity": 1,
+        "price": 75.0
+      }
+    ]
+  },
+  {
+    "cart_id": "cart_00012",
+    "status": "active",
+    "user_id": "user_012",
+    "items": [
+      {
+        "product_id": "prod_00013",
+        "name": "Ceramic Mug",
+        "quantity": 4,
+        "price": 18.0
+      }
+    ]
+  },
+  {
+    "cart_id": "cart_00013",
+    "status": "active",
+    "user_id": "user_013",
+    "items": [
+      {
+        "product_id": "prod_00017",
+        "name": "Digital Camera",
+        "quantity": 1,
+        "price": 350.0
+      }
+    ]
+  },
+  {
+    "cart_id": "cart_00014",
+    "status": "active",
+    "user_id": "user_014",
+    "items": [
+      {
+        "product_id": "prod_00004",
+        "name": "Stainless Steel Water Bottle",
+        "quantity": 2,
+        "price": 20.0
+      }
+    ]
+  },
+  {
+    "cart_id": "cart_00015",
+    "status": "active",
+    "user_id": "user_015",
+    "items": [
+      {
+        "product_id": "prod_00018",
+        "name": "Fitness Tracker",
+        "quantity": 1,
+        "price": 60.0
+      }
+    ]
+  },
+  {
+    "cart_id": "cart_00016",
+    "status": "active",
+    "user_id": "user_016",
+    "items": [
+      {
+        "product_id": "prod_00014",
+        "name": "Backpack Organizer",
+        "quantity": 1,
+        "price": 22.5
       }
     ]
   },
   {
     "cart_id": "cart_00017",
-    "user_id": "user_012",
+    "status": "active",
+    "user_id": "user_017",
     "items": [
       {
         "product_id": "prod_00012",
         "name": "Portable Charger",
         "quantity": 2,
-        "price": 30.00
+        "price": 30.0
       }
     ]
   },
   {
     "cart_id": "cart_00018",
-    "user_id": "user_014",
+    "status": "active",
+    "user_id": "user_018",
     "items": [
       {
         "product_id": "prod_00009",
         "name": "Yoga Mat",
         "quantity": 1,
-        "price": 40.00
+        "price": 40.0
       }
     ]
   },
   {
     "cart_id": "cart_00019",
-    "user_id": "user_016",
+    "status": "active",
+    "user_id": "user_019",
     "items": [
       {
         "product_id": "prod_00007",
@@ -265,13 +285,14 @@
   },
   {
     "cart_id": "cart_00020",
+    "status": "active",
     "user_id": "user_020",
     "items": [
       {
         "product_id": "prod_00011",
         "name": "Leather Wallet",
         "quantity": 1,
-        "price": 45.00
+        "price": 45.0
       }
     ]
   }

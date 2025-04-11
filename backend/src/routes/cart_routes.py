@@ -7,16 +7,10 @@ from src.jwt_utils import role_required  # Import the decorator
 cart_bp = Blueprint("carts", __name__)
 
 
-@cart_bp.route("/", methods=["GET"])
-@role_required("make_purchase")
-def get_carts():
-    return jsonify(find_all_carts()), 200
-
-
 @cart_bp.route("/<string:cart_id>", methods=["GET"])
 @role_required("make_purchase")
 def get_cart(cart_id):
-    cart = find_cart_by_id(cart_id)
+    cart = find_cart_by_cart_id(cart_id)
     if cart:
         return jsonify(cart), 200
     return jsonify({"error": "Cart not found"}), 404
@@ -26,7 +20,7 @@ def get_cart(cart_id):
 @role_required("make_purchase")
 def create_cart_route():
     data = request.json
-    if find_cart_by_id(data.get("cart_id")):
+    if find_cart_by_cart_id(data.get("cart_id")):
         return jsonify({"error": "Cart ID already exists"}), 400
     create_cart(data)
     return jsonify({"message": "Cart created"}), 201
