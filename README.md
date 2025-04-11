@@ -118,16 +118,27 @@ Expected:
 
 Testing other routes if needed
 
+## ACID testing
+- Use MongoDB’s ACID transactions for critical operations (e.g., checkout).
+   - This is done via pymongo's session feature see [here](backend/src/routes/api_routes.py?plain=1#L117)
+- Demonstrate rollback mechanisms to handle failures. Compare transactions in
+MongoDB vs. MySQL (optional report).
+   - There are python test to demonstrate this feature. See [here](backend/tests/checkout_acid_test.py) The tests covers 3 different scenarios.
+   - command to run pytest:
+```
+docker exec -it flask-backend pytest
+```
+
 
 ## MS2:
 
-### (Kuo Lu) Task 3: ACID operation
+### Task 3: ACID operation
 - Use MongoDB’s ACID transactions for critical operations (e.g., checkout).
 - Demonstrate rollback mechanisms to handle failures. Compare transactions in
 MongoDB vs. MySQL (optional report).
 
 
-### (Weifan) Task 4: Role-Based Access Control (RBAC) & Security (20 pts, ~5 hrs)
+### Task 4: Role-Based Access Control (RBAC) & Security (20 pts, ~5 hrs)
 - Implement user roles (e.g., Admin, User).
 - Enforce access restrictions based on roles in database.
    - implement access based on permissions
@@ -135,7 +146,7 @@ MongoDB vs. MySQL (optional report).
 - Prevent unauthorized data access with MongoDB security features.
 
 
-### (Raagini, by Wednesday) Task 5: Advanced MongoDB Queries & Aggregation (20 pts, ~5 hrs)
+### Task 5: Advanced MongoDB Queries & Aggregation (20 pts, ~5 hrs)
 - Implement at least 5 complex aggregation queries using $lookup, $group, $sort, $unwind, etc.
    - Example:
       - E-Commerce: Top-selling products, most active users
@@ -143,7 +154,7 @@ MongoDB vs. MySQL (optional report).
 - Document query purpose, implementation, and results
 
 
-### (Xu Tang) Task 6: Query Optimization & Indexing Strategy (10 pts, ~3 hrs) (docs/Indexing Strategy and Benchmark Report)
+### Task 6: Query Optimization & Indexing Strategy (10 pts, ~3 hrs) (docs/Indexing Strategy and Benchmark Report)
 - Benchmark at least 3 queries performance before/after indexing.
 - Explain why certain fields were indexed and how indexing improves speed.
 - Use Explain Plans to analyze query execution (MongoDB’s $explain).
