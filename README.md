@@ -142,11 +142,12 @@ MongoDB vs. MySQL (optional report).
 - Document query purpose, implementation, and results
 
 
-### (Xu Tang) Task 6: Query Optimization & Indexing Strategy (10 pts, ~3 hrs) 
+### (Xu Tang) Task 6: Query Optimization & Indexing Strategy (10 pts, ~3 hrs) (docs/Indexing Strategy and Benchmark Report)
 - Benchmark at least 3 queries performance before/after indexing.
 - Explain why certain fields were indexed and how indexing improves speed.
 - Use Explain Plans to analyze query execution (MongoDB’s $explain).
 - Deliverable: A short report on performance before/after indexing, query optimization strategies used, the $explain result, and the reasons for improvement
+
 
 
 ## MS1:
