@@ -133,3 +133,15 @@ def get_carts():
     carts = list(db.carts.find({"user_id": user_id, "status": "active"}))
     carts = [clean_mongo_doc(i) for i in carts]
     return jsonify(carts), 200
+
+@api_bp.route("/api/orders/", methods=["GET"])
+def get_user_order():
+    db = get_db()
+    user_id = request.args.get("user_id")
+    
+    if not user_id:
+        return jsonify({"error": "Missing user_id"}), 400
+
+    orders = list(db.orders.find({"user_id": user_id}))
+    orders = [clean_mongo_doc(i) for i in orders]
+    return jsonify(orders), 200

@@ -55,7 +55,7 @@ Please visit http://localhost:5173/ for frontend page. There is a role-based aut
 
 For example, 
 
-emma@example.com is an admin, which has all the permission to edit, add, delete, update products.  There will be more features available exclusively to admin later.
+admin@example.com is an admin, which has all the permission to edit, add, delete, update products.  There will be more features available exclusively to admin later.
 
 alice@example.com is a buyer, which can not be doing any CRUD operation in our current page.
 

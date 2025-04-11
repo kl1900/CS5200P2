@@ -5,7 +5,7 @@ def test_checkout_creates_complete_order(client, db):
     user_id = "user_001"
     cart_id = "cart_00089"
 
-    db.cart.insert_one({
+    db.carts.insert_one({
         "cart_id": cart_id,
         "user_id": user_id,
         "status": "active",
@@ -19,7 +19,7 @@ def test_checkout_creates_complete_order(client, db):
         ]
     })
 
-    response = client.post("/api/checkout", json={
+    response = client.post("/api/checkout/", json={
         "user_id": user_id,
         "cart_id": cart_id,
         "payment_method": "credit_card",
@@ -75,11 +75,11 @@ def test_checkout_creates_complete_order(client, db):
         assert order[field].endswith("Z")  # UTC format
 
     # Cart should be checked_out
-    cart = db.cart.find_one({"cart_id": cart_id})
+    cart = db.carts.find_one({"cart_id": cart_id})
     assert cart["status"] == "checked_out"
 
     # New active cart exists
-    new_cart = db.cart.find_one({"user_id": user_id, "status": "active"})
+    new_cart = db.carts.find_one({"user_id": user_id, "status": "active"})
     assert new_cart is not None
     assert new_cart["items"] == []
 
@@ -89,7 +89,7 @@ def test_checkout_race_condition(client, db):
     cart_id = "cart_race"
 
     # Insert a shared cart for both threads
-    db.cart.insert_one({
+    db.carts.insert_one({
         "cart_id": cart_id,
         "user_id": user_id,
         "status": "active",
@@ -128,7 +128,7 @@ def test_checkout_race_condition(client, db):
     results = [None, None]
 
     def run_checkout(index):
-        results[index] = client.post("/api/checkout", json=checkout_payload)
+        results[index] = client.post("/api/checkout/", json=checkout_payload)
 
     # Simulate concurrent checkouts
     threads = [
@@ -162,11 +162,11 @@ def test_checkout_race_condition(client, db):
     assert order["submission_date"].endswith("Z")
 
     # Ensure cart is marked checked_out
-    cart = db.cart.find_one({"cart_id": cart_id})
+    cart = db.carts.find_one({"cart_id": cart_id})
     assert cart["status"] == "checked_out"
 
     # New active cart should exist
-    new_cart = db.cart.find_one({"user_id": user_id, "status": "active"})
+    new_cart = db.carts.find_one({"user_id": user_id, "status": "active"})
     assert new_cart is not None
     assert new_cart["items"] == []
     
@@ -175,7 +175,7 @@ def test_checkout_rolls_back_when_update_cart_fails(client, db):
     cart_id = "cart_patch"
 
     # Insert test cart
-    db.cart.insert_one({
+    db.carts.insert_one({
         "cart_id": cart_id,
         "user_id": user_id,
         "status": "active",
@@ -185,8 +185,8 @@ def test_checkout_rolls_back_when_update_cart_fails(client, db):
     })
 
 
-    with patch("src.routes.checkout_routes.txn_ops_factory", side_effect=Exception("simulated update failure")):
-        response = client.post("/api/checkout", json={
+    with patch("src.routes.api_routes.txn_ops_factory", side_effect=Exception("simulated update failure")):
+        response = client.post("/api/checkout/", json={
             "user_id": "user_x",
             "cart_id": "cart_x",
             "payment_method": "credit_card",
@@ -199,6 +199,6 @@ def test_checkout_rolls_back_when_update_cart_fails(client, db):
 
     # Nothing should be committed
     assert db.orders.count_documents({"user_id": user_id}) == 0
-    assert db.cart.find_one({"cart_id": cart_id})["status"] == "active"
-    assert db.cart.count_documents({"user_id": user_id, "status": "active"}) == 1
+    assert db.carts.find_one({"cart_id": cart_id})["status"] == "active"
+    assert db.carts.count_documents({"user_id": user_id, "status": "active"}) == 1
     
