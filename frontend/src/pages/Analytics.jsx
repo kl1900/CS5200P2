@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, LineChart, Line } from "recharts";
 
 function Analytics() {
   const [topProducts, setTopProducts] = useState([]);
@@ -40,6 +41,15 @@ function Analytics() {
             <li key={i}>{p.productName} — {p.totalSold} sold</li>
           ))}
         </ul>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={topProducts} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="productName" interval={0} angle={-20} textAnchor="end" height={60} />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="totalSold" fill="#8884d8" />
+          </BarChart>
+        </ResponsiveContainer>
       </section>
 
       <section>
@@ -49,6 +59,15 @@ function Analytics() {
             <li key={i}>{b.buyerName} — {b.totalOrders} orders</li>
           ))}
         </ul>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={activeBuyers} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="buyerName" interval={0} angle={-20} textAnchor="end" height={60} />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="totalOrders" fill="#82ca9d" />
+          </BarChart>
+        </ResponsiveContainer>
       </section>
 
       <section>
@@ -58,6 +77,15 @@ function Analytics() {
             <li key={i}>{s.sellerName} — ${s.totalRevenue.toFixed(2)}</li>
           ))}
         </ul>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={revenueBySeller} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="sellerName" interval={0} angle={-20} textAnchor="end" height={60} />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="totalRevenue" fill="#ffc658" />
+          </BarChart>
+        </ResponsiveContainer>
       </section>
 
       <section>
@@ -67,6 +95,15 @@ function Analytics() {
             <li key={i}>{c.productName} — {c.cartCount} carts</li>
           ))}
         </ul>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart data={mostCarted} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="productName" interval={0} angle={-20} textAnchor="end" height={60} />
+            <YAxis />
+            <Tooltip />
+            <Bar dataKey="cartCount" fill="#ff7f7f" />
+          </BarChart>
+        </ResponsiveContainer>
       </section>
 
       <section>
@@ -76,6 +113,15 @@ function Analytics() {
             <li key={i}>{d._id} — {d.count} orders</li>
           ))}
         </ul>
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={ordersByDate} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="_id" />
+            <YAxis />
+            <Tooltip />
+            <Line type="monotone" dataKey="count" stroke="#8884d8" strokeWidth={2} />
+          </LineChart>
+        </ResponsiveContainer>
       </section>
     </div>
   );
