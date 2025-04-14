@@ -3,7 +3,7 @@
     "user_id": "u123",
     "name": "Foo Bar",
     "roles": "admin",
-    "email": "emma@example.com",
+    "email": "admin@example.com",
     "phone": "666666666"
   },
   {

@@ -19,7 +19,7 @@ def jwt_required(f):
             return jsonify({"error": "Token missing"}), 401
         try:
             decoded = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-            request.user = decoded
+            request.current_user = decoded
         except jwt.ExpiredSignatureError:
             return jsonify({"error": "Token expired"}), 403
         except jwt.InvalidTokenError:
@@ -39,7 +39,7 @@ def role_required(required_permission):
                 role = decoded.get("roles")
                 if role not in permissions or required_permission not in permissions[role]:
                     return jsonify({"error": "Permission denied"}), 403
-                request.user = decoded
+                request.current_user = decoded
             except jwt.ExpiredSignatureError:
                 return jsonify({"error": "Token expired"}), 403
             except jwt.InvalidTokenError:

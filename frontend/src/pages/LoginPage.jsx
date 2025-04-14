@@ -19,6 +19,7 @@ export default function LoginPage() {
         localStorage.setItem("jwt", data.token)
         setError("")
         alert("Logged in successfully!")
+        window.location.reload()
       } else {
         setError(data.error || "Login failed")
       }

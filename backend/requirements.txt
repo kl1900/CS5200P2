@@ -5,3 +5,4 @@ flask-cors
 PyJWT
 bcrypt
 python-dateutil
+pytest
