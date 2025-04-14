@@ -108,7 +108,7 @@ function ProductPage() {
       setError(err.message || "Error deleting product. Please try again.")
     }
   }
-
+  
   const handleEdit = (product) => {
     setForm({
       product_id: product.product_id,
@@ -124,6 +124,40 @@ function ProductPage() {
     setForm({ product_id: '', name: '', price: '', description: '', seller_id: 'user_002' })
     setEditId(null)
   }
+  
+  // carts add to cart
+  const handleAddToCart = async (product) => {
+  const token = localStorage.getItem("jwt")
+  if (!token) {
+    alert("You must be logged in to add to cart.")
+    return
+  }
+
+  try {
+    const res = await fetch("http://localhost:8000/carts/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        product_id: product.product_id,
+        quantity: 1
+      })
+    })
+
+    const result = await res.json()
+    if (res.ok) {
+      alert("Added to cart!")
+    } else {
+      alert("Failed to add: " + result.error)
+    }
+  } catch (err) {
+    console.error("Add to cart error:", err)
+    alert("Something went wrong.")
+  }
+}
+
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 15px' }}>
@@ -236,11 +270,13 @@ function ProductPage() {
                 </td>
                 
                 <td style={{ padding: '8px' }}>
-                  {!isBuyer && (
+                  {!isBuyer ? (
                     <>
                       <button onClick={() => handleEdit(p)} style={{ marginRight: '5px' }}>Edit</button>
                       <button onClick={() => handleDelete(p.product_id)}>Delete</button>
                     </>
+                  ) : (
+                    <button onClick={() => handleAddToCart(p)}>Add to Cart</button>
                   )}
                 </td>
 
