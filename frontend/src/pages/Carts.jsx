@@ -15,7 +15,7 @@ function CartPage() {
       name: "", street: "", city: "", state: "", zip: "", country: ""
     }
   })
-  const API_BASE = 'http://localhost:8000/api'
+  const API_BASE = 'http://localhost:8000'
 
   // Decode user_id from JWT
   const token = localStorage.getItem("jwt")
@@ -34,11 +34,15 @@ function CartPage() {
       return
     }
 
-    fetch(`${API_BASE}/carts/?user_id=${userId}`)
+    fetch(`${API_BASE}/carts/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
       .then(res => res.ok ? res.json() : Promise.reject("Failed to load cart"))
       .then(data => {
-        if (data.length > 0) {
-          setCart(data[0])  // assuming one active cart per user
+        if (data && data.items) {
+          setCart(data)  // change to array
         } else {
           setError("No active cart found")
         }
@@ -66,7 +70,11 @@ function CartPage() {
     try {
       const res = await fetch(`${API_BASE}/checkout/`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+          "Content-Type": "application/json" ,
+          Authorization: `Bearer ${token}`
+        },
+        
         body: JSON.stringify({
           user_id: cart.user_id,
           cart_id: cart.cart_id,
@@ -132,8 +140,6 @@ function CartPage() {
             </p>
           </>
         )}
-
-      <p className="font-semibold mb-4">Total: ${total.toFixed(2)}</p>
 
       <label className="block mb-3">
         Payment Method:
