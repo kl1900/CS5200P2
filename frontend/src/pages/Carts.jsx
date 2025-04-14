@@ -101,6 +101,32 @@ function CartPage() {
 
   const total = cart.items.reduce((sum, item) => sum + item.quantity * item.price, 0)
 
+  const handleRemoveItem = async (product_id) => {
+    try {
+      const res = await fetch("http://localhost:8000/carts/remove", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("jwt")}`
+        },
+        body: JSON.stringify({ product_id })
+      });
+
+      if (res.ok) {
+        // Refresh cart
+        const updatedCart = await res.json();
+        setCart((prev) => ({
+          ...prev,
+          items: prev.items.filter(item => item.product_id !== product_id)
+        }));
+      } else {
+        console.error("Failed to remove item");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+    }
+  };
+
   return (
     <div className="p-4 max-w-xl mx-auto">
       <h2 className="text-2xl font-bold mb-4">🛒 Your Cart</h2>
@@ -125,6 +151,7 @@ function CartPage() {
                     <td className="text-center p-2">${item.price.toFixed(2)}</td>
                     <td className="text-right p-2">
                       ${(item.quantity * item.price).toFixed(2)}
+                      <button onClick={() => handleRemoveItem(item.product_id)} className="ml-2 text-red-500">Remove</button>
                     </td>
                   </tr>
                 ))}

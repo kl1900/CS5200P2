@@ -111,3 +111,42 @@ def add_to_cart():
     update_cart(cart["cart_id"], {"items": cart["items"]})
     return jsonify({"message": "Product added to existing cart"}), 200
 
+
+# "Remove an Item from Cart" Route
+@cart_bp.route("/remove", methods=["POST"])
+@role_required("make_purchase")
+def remove_from_cart():
+    user_id = request.current_user["user_id"]
+    data = request.get_json()
+    product_id = data.get("product_id")
+
+    if not product_id:
+        return jsonify({"error": "Product ID is required"}), 400
+
+    cart = find_cart_by_user_id(user_id)
+    if not cart:
+        return jsonify({"error": "Cart not found"}), 404
+
+    updated_items = [item for item in cart.get("items", []) if item["product_id"] != product_id]
+    update_cart_by_user_id(user_id, updated_items)
+
+    return jsonify({"message": "Item removed from cart"}), 200
+
+
+# "Cart Checkout" Route
+@cart_bp.route("/checkout", methods=["POST"])
+@role_required("make_purchase")
+def checkout():
+    user_id = request.current_user["user_id"]
+    cart = find_cart_by_user_id(user_id)
+
+    if not cart or not cart.get("items"):
+        return jsonify({"error": "Cart is empty"}), 400
+
+    # Here, you can add logic to save the order, deduct stock, etc.
+
+    # Clear the cart
+    update_cart_by_user_id(user_id, [])
+
+    return jsonify({"message": "Checkout successful"}), 200
+
