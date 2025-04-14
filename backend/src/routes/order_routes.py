@@ -9,7 +9,8 @@ order_bp = Blueprint("orders", __name__)
 @order_bp.route("/", methods=["GET"])
 @role_required("make_purchase")
 def get_orders():
-    return jsonify(find_all_orders()), 200
+    user_id = request.current_user["user_id"]
+    return jsonify(find_all_orders(user_id)), 200
 
 
 @order_bp.route("/<string:order_id>", methods=["GET"])
@@ -48,3 +49,5 @@ def delete_order_route(order_id):
     if result.deleted_count:
         return jsonify({"message": "Order deleted"}), 200
     return jsonify({"error": "Order not found"}), 404
+
+

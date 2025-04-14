@@ -65,35 +65,46 @@ function CartPage() {
     }))
   }
 
-  const handleCheckout = async () => {
-    setStatus("processing")
-    try {
-      const res = await fetch(`${API_BASE}/checkout/`, {
-        method: "POST",
-        headers: { 
-          "Content-Type": "application/json" ,
-          Authorization: `Bearer ${token}`
-        },
-        
-        body: JSON.stringify({
-          user_id: cart.user_id,
-          cart_id: cart.cart_id,
-          payment_method: form.payment_method,
-          billing_address: form.billing_address,
-          shipping_address: form.shipping_address
-        })
-      })
 
-      const result = await res.json()
-      if (res.ok) {
-        setStatus("success")
-      } else {
-        setStatus(`error: ${result.error}`)
-      }
-    } catch (err) {
-      setStatus("error: checkout failed")
+  const handleCheckout = async () => {
+  setStatus("processing");
+
+  console.log("Sending checkout payload:", {
+  payment_method: form.payment_method,
+  billing_address: form.billing_address,
+  shipping_address: form.shipping_address
+});
+
+  try {
+    const res = await fetch(`${API_BASE}/carts/checkout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        payment_method: form.payment_method,
+        billing_address: form.billing_address,
+        shipping_address: form.shipping_address
+      })
+    });
+
+    const result = await res.json();
+    if (res.ok) {
+      setStatus("success");
+      setCart(null); // Clear frontend cart
+      alert("Checkout successful!");
+    } else {
+      console.error("Checkout failed:", result);
+      setStatus(`error: ${result.error || "Unexpected error"}`);
     }
+  } catch (err) {
+    console.error("Checkout failed:", err);
+    setStatus("error: checkout failed");
   }
+};
+
+
 
   if (loading) return <p>Loading cart...</p>
   if (error) return <p className="text-red-500">{error}</p>

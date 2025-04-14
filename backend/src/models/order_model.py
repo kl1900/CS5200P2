@@ -3,8 +3,9 @@ from src.utils import clean_mongo_result
 
 
 @clean_mongo_result
-def find_all_orders():
-    return list(get_db().orders.find())
+def find_all_orders(user_id=None):
+    query = {"user_id": user_id} if user_id else {}
+    return list(get_db().orders.find(query))
 
 
 @clean_mongo_result
