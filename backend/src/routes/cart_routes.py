@@ -43,3 +43,44 @@ def delete_cart_route(cart_id):
     if result.deleted_count:
         return jsonify({"message": "Cart deleted"}), 200
     return jsonify({"error": "Cart not found"}), 404
+
+
+# Add: "Get My Cart" Route
+@cart_bp.route("/me", methods=["GET"])
+@role_required("make_purchase")
+def get_my_cart():
+    user_id = request.current_user["user_id"]
+    cart = find_cart_by_user_id(user_id)
+
+    if not cart:
+        return jsonify({"message": "Cart is empty", "items": []}), 200
+    return jsonify(cart), 200
+
+
+# Add: "Add to Cart" Route
+@cart_bp.route("/add", methods=["POST"])
+@role_required("make_purchase")
+def add_to_cart():
+    user_id = request.current_user["user_id"]
+    data = request.get_json()
+    product_id = data.get("product_id")
+    quantity = int(data.get("quantity", 1))
+
+    if not product_id:
+        return jsonify({"error": "Product ID is required"}), 400
+
+    cart = find_cart_by_user_id(user_id)
+    if not cart:
+        cart = {"user_id": user_id, "items": []}
+
+    # Check if item already in cart
+    for item in cart["items"]:
+        if item["product_id"] == product_id:
+            item["quantity"] += quantity
+            break
+    else:
+        cart["items"].append({"product_id": product_id, "quantity": quantity})
+
+    update_cart_by_user_id(user_id, cart["items"])
+    return jsonify({"message": "Product added to cart"}), 200
+
