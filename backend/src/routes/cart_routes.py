@@ -4,7 +4,13 @@ from src.models.cart_model import *
 
 from src.models.product_model import find_product_by_id
 
+from src.models.order_model import create_order
+
 from src.jwt_utils import role_required  # Import the decorator
+
+from datetime import datetime
+
+import uuid
 
 cart_bp = Blueprint("carts", __name__)
 
@@ -137,16 +143,50 @@ def remove_from_cart():
 @cart_bp.route("/checkout", methods=["POST"])
 @role_required("make_purchase")
 def checkout():
-    user_id = request.current_user["user_id"]
-    cart = find_cart_by_user_id(user_id)
+    user = request.current_user
+    user_id = user["user_id"]
+    data = request.get_json()
 
+    # Get cart
+    cart = find_cart_by_user_id(user_id)
     if not cart or not cart.get("items"):
         return jsonify({"error": "Cart is empty"}), 400
 
-    # Here, you can add logic to save the order, deduct stock, etc.
+    items = cart["items"]
+    subtotal = sum(item["price"] * item["quantity"] for item in items)
+    tax = round(subtotal * 0.1, 2)
+    shipping_fee = 5.00
+    total = subtotal + tax + shipping_fee
 
-    # Clear the cart
+    order_data = {
+        "order_id": f"order_{str(uuid.uuid4())[:8]}",
+        "user_id": user_id,
+        "items": [
+            {
+                "product_id": item["product_id"],
+                "name": item.get("name", ""),
+                "quantity": item["quantity"],
+                "unit_price": item["price"],
+                "subtotal": item["quantity"] * item["price"]
+            } for item in items
+        ],
+        "subtotal": subtotal,
+        "tax": tax,
+        "shipping_fee": shipping_fee,
+        "total": total,
+        "payment_method": data.get("payment_method", "credit_card"),
+        "payment_status": "completed",
+        "transaction_date": datetime.utcnow().isoformat(),
+        "billing_address": data.get("billing_address"),
+        "shipping_address": data.get("shipping_address"),
+        "submission_date": datetime.utcnow().isoformat()
+    }
+
+    # Save order and empty cart
+    create_order(order_data)
     update_cart_by_user_id(user_id, [])
 
-    return jsonify({"message": "Checkout successful"}), 200
+    # Remove MongoDB-specific ObjectId before returning
+    order_data.pop("_id", None)
 
+    return jsonify({"message": "Checkout successful", "order": order_data}), 200
