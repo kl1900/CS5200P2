@@ -15,13 +15,37 @@ services:
       timeout: 5s
       retries: 10
 
+  mongo-secondary:
+    image: mongo
+    container_name: mongo-secondary
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-secondary-data:/data/db
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    healthcheck:
+      test: echo 'rs.status().ok' | mongosh localhost:27017 --quiet
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   
   mongo-init:
     image: mongo
     depends_on:
       - mongo
+      - mongo-secondary
     restart: "no"
-    entrypoint: [ "bash", "-c", "sleep 5 && mongosh --host mongo --eval 'rs.initiate({_id: \"rs0\", members: [{ _id: 0, host: \"mongo:27017\" }]})'" ]
+    entrypoint: >
+      bash -c "sleep 5 &&
+      mongosh --host mongo --eval '
+        rs.initiate({
+          _id: \"rs0\",
+          members: [
+            { _id: 0, host: \"mongo:27017\" },
+            { _id: 1, host: \"mongo-secondary:27017\", priority: 0 }
+          ]
+        })'"
 
   
   mongo-express:
@@ -35,8 +59,8 @@ services:
       - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
       - ME_CONFIG_BASICAUTH_USERNAME=admin
       - ME_CONFIG_BASICAUTH_PASSWORD=5200
-    depends_on:
-      - mongo
+      - ME_CONFIG_MONGODB_URL=mongodb://mongo:27017,mongo-secondary:27017/?replicaSet=rs0
+
 
   backend:
     build: ./backend
@@ -65,3 +89,5 @@ services:
 
 volumes:
   mongo-data:
+  mongo-secondary-data:
+
