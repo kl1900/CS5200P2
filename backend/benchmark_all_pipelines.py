@@ -4,7 +4,7 @@ from pymongo import MongoClient
 import time
 
 # === Configuration and Connection ===
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient("mongodb://mongo:27017,mongo-secondary:27017/?replicaSet=rs0")
 db = client["mydb"]
 
 # Collections

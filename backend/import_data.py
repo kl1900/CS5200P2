@@ -5,10 +5,10 @@ from dateutil.parser import parse as parse_date
 
 from pymongo import InsertOne, MongoClient
 
-mongo_uri = "mongodb://mongo:27017/mydb?replicaSet=rs0"
+mongo_uri = "mongodb://mongo:27017,mongo-secondary:27017/?replicaSet=rs0"
 client = MongoClient(mongo_uri)
 
-db = client.get_database()
+db = client.get_database("mydb")
 
 sample_data = Path(__file__).parent / "sample_data"
 

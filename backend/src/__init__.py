@@ -12,8 +12,8 @@ from src.routes.product_routes import product_bp
 from src.routes.user_routes import user_bp
 from pymongo import MongoClient
 
-mongo_uri = os.environ.get("MONGO_URI", "mongodb://localhost:27017/")
-mongo_client = MongoClient(f"{mongo_uri}?replicaSet=rs0")
+mongo_uri = os.environ.get("MONGO_URI", "mongodb://mongo:27017,mongo-secondary:27017/?replicaSet=rs0")
+mongo_client = MongoClient(mongo_uri)
 
 def create_app():
     app = Flask(__name__)
