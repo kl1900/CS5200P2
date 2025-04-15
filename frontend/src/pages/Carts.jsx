@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom";
+
 import { jwtDecode } from "jwt-decode"
 
 function CartPage() {
@@ -17,7 +19,6 @@ function CartPage() {
   })
   const API_BASE = 'http://localhost:8000'
 
-  // Decode user_id from JWT
   const token = localStorage.getItem("jwt")
   let userId = null
   try {
@@ -35,17 +36,12 @@ function CartPage() {
     }
 
     fetch(`${API_BASE}/carts/me`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
+      headers: { Authorization: `Bearer ${token}` }
     })
       .then(res => res.ok ? res.json() : Promise.reject("Failed to load cart"))
       .then(data => {
-        if (data && data.items) {
-          setCart(data)  // change to array
-        } else {
-          setError("No active cart found")
-        }
+        if (data && data.items) setCart(data)
+        else setError("No active cart found")
         setLoading(false)
       })
       .catch(err => {
@@ -64,157 +60,161 @@ function CartPage() {
       }
     }))
   }
-
-
+  const navigate = useNavigate();
+  
   const handleCheckout = async () => {
-  setStatus("processing");
-
-  console.log("Sending checkout payload:", {
-  payment_method: form.payment_method,
-  billing_address: form.billing_address,
-  shipping_address: form.shipping_address
-});
-
-  try {
-    const res = await fetch(`${API_BASE}/carts/checkout`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`
-      },
-      body: JSON.stringify({
-        payment_method: form.payment_method,
-        billing_address: form.billing_address,
-        shipping_address: form.shipping_address
-      })
-    });
-
-    const result = await res.json();
-    if (res.ok) {
-      setStatus("success");
-      setCart(null); // Clear frontend cart
-      alert("Checkout successful!");
-    } else {
-      console.error("Checkout failed:", result);
-      setStatus(`error: ${result.error || "Unexpected error"}`);
-    }
-  } catch (err) {
-    console.error("Checkout failed:", err);
-    setStatus("error: checkout failed");
-  }
-};
-
-
-
-  if (loading) return <p>Loading cart...</p>
-  if (error) return <p className="text-red-500">{error}</p>
-  if (!cart) return <p>No cart available.</p>
-
-  const total = cart.items.reduce((sum, item) => sum + item.quantity * item.price, 0)
-
-  const handleRemoveItem = async (product_id) => {
+    setStatus("processing")
     try {
-      const res = await fetch("http://localhost:8000/carts/remove", {
+      const res = await fetch(`${API_BASE}/carts/checkout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("jwt")}`
+          Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ product_id })
-      });
+        body: JSON.stringify({
+          payment_method: form.payment_method,
+          billing_address: form.billing_address,
+          shipping_address: form.shipping_address
+        })
+      })
 
+      const result = await res.json()
       if (res.ok) {
-        // Refresh cart
-        const updatedCart = await res.json();
-        setCart((prev) => ({
-          ...prev,
-          items: prev.items.filter(item => item.product_id !== product_id)
-        }));
+        setStatus("success")
+        setCart(null)
+        alert("Checkout successful!")
+        navigate("/orders");
       } else {
-        console.error("Failed to remove item");
+        console.error("Checkout failed:", result)
+        setStatus(`error: ${result.error || "Unexpected error"}`)
       }
     } catch (err) {
-      console.error("Error:", err);
+      console.error("Checkout failed:", err)
+      setStatus("error: checkout failed")
     }
-  };
+  }
+
+  const handleRemoveItem = async (product_id) => {
+    try {
+      const res = await fetch(`${API_BASE}/carts/remove`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ product_id })
+      })
+
+      if (res.ok) {
+        setCart(prev => ({
+          ...prev,
+          items: prev.items.filter(item => item.product_id !== product_id)
+        }))
+      } else {
+        console.error("Failed to remove item")
+      }
+    } catch (err) {
+      console.error("Error:", err)
+    }
+  }
+
+  if (loading) return <p className="text-center my-4">Loading cart...</p>
+  if (error) return <p className="text-center text-danger">{error}</p>
+  if (!cart) return <p className="text-center text-muted">No cart available.</p>
+
+  const total = cart.items.reduce((sum, item) => sum + item.quantity * item.price, 0)
 
   return (
-    <div className="p-4 max-w-xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">🛒 Your Cart</h2>
-      {cart.items.length === 0 ? (
-          <p className="text-gray-600 mb-4">Your cart is empty.</p>
-        ) : (
-          <>
-            <table className="w-full mb-4 border border-gray-200">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="text-left p-2">Product</th>
-                  <th className="text-center p-2">Qty</th>
-                  <th className="text-center p-2">Price</th>
-                  <th className="text-right p-2">Subtotal</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cart.items.map((item, idx) => (
-                  <tr key={idx} className="border-t">
-                    <td className="p-2">{item.name}</td>
-                    <td className="text-center p-2">{item.quantity}</td>
-                    <td className="text-center p-2">${item.price.toFixed(2)}</td>
-                    <td className="text-right p-2">
-                      ${(item.quantity * item.price).toFixed(2)}
-                      <button onClick={() => handleRemoveItem(item.product_id)} className="ml-2 text-red-500">Remove</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-
-            <p className="font-semibold mb-4 text-right">
-              Total: $
-              {cart.items.reduce(
-                (sum, item) => sum + item.price * item.quantity,
-                0
-              ).toFixed(2)}
-            </p>
-          </>
-        )}
-
-      <label className="block mb-3">
-        Payment Method:
-        <select
-          value={form.payment_method}
-          onChange={(e) => setForm(prev => ({ ...prev, payment_method: e.target.value }))}
-          className="block w-full border px-2 py-1 mt-1"
-        >
-          <option value="credit_card">Credit Card</option>
-          <option value="paypal">PayPal</option>
-        </select>
-      </label>
-
-      {["billing_address", "shipping_address"].map(section => (
-        <div key={section} className="mb-4">
-          <h4 className="font-medium capitalize">{section.replace("_", " ")}</h4>
-          {["name", "street", "city", "state", "zip", "country"].map(field => (
-            <input
-              key={field}
-              placeholder={field}
-              value={form[section][field]}
-              onChange={(e) => handleChange(section, field, e.target.value)}
-              className="block w-full border px-2 py-1 mb-2"
-            />
-          ))}
+    <div className="container py-4">
+      <div className="card shadow-sm">
+        <div className="card-header bg-primary text-white">
+          <h3 className="mb-0">🛒 Your Cart</h3>
         </div>
-      ))}
+        <div className="card-body">
+          {cart.items.length === 0 ? (
+            <p className="text-muted">Your cart is empty.</p>
+          ) : (
+            <>
+              <table className="table table-bordered table-hover mb-4">
+                <thead className="table-light">
+                  <tr>
+                    <th>Product</th>
+                    <th className="text-center">Qty</th>
+                    <th className="text-center">Price</th>
+                    <th className="text-end">Subtotal</th>
+                    <th className="text-center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {cart.items.map((item, idx) => (
+                    <tr key={idx}>
+                      <td>{item.name}</td>
+                      <td className="text-center">{item.quantity}</td>
+                      <td className="text-center">${item.price.toFixed(2)}</td>
+                      <td className="text-end">${(item.quantity * item.price).toFixed(2)}</td>
+                      <td className="text-center">
+                        <button
+                          className="btn btn-sm btn-outline-danger"
+                          onClick={() => handleRemoveItem(item.product_id)}
+                        >
+                          Remove
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
 
-      <button
-        onClick={handleCheckout}
-        disabled={status === "processing"}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        {status === "processing" ? "Processing..." : "Checkout"}
-      </button>
+              <h5 className="text-end">Total: ${total.toFixed(2)}</h5>
+            </>
+          )}
 
-      {status && <p className="mt-2 text-sm text-gray-700">Status: {status}</p>}
+          <div className="my-4">
+            <label className="form-label fw-semibold">Payment Method</label>
+            <select
+              value={form.payment_method}
+              onChange={(e) => setForm(prev => ({ ...prev, payment_method: e.target.value }))}
+              className="form-select"
+            >
+              <option value="credit_card">Credit Card</option>
+              <option value="paypal">PayPal</option>
+            </select>
+          </div>
+
+          {["billing_address", "shipping_address"].map(section => (
+            <div key={section} className="mb-4">
+              <h6 className="fw-bold text-capitalize">{section.replace("_", " ")}</h6>
+              <div className="row g-2">
+                {["name", "street", "city", "state", "zip", "country"].map(field => (
+                  <div key={field} className="col-md-6">
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder={field}
+                      value={form[section][field]}
+                      onChange={(e) => handleChange(section, field, e.target.value)}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div className="text-end">
+            <button
+              onClick={handleCheckout}
+              disabled={status === "processing"}
+              className="btn btn-success"
+            >
+              {status === "processing" ? "Processing..." : "Checkout"}
+            </button>
+          </div>
+
+          {status && (
+            <p className="mt-3 text-center text-secondary">Status: {status}</p>
+          )}
+        </div>
+      </div>
     </div>
   )
 }
