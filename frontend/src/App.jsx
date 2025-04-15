@@ -52,7 +52,7 @@ function App() {
           <Route path="/products" element={<ProtectedRoute><ProductPage /> </ProtectedRoute>} />
           <Route path="/products/:id" element={<ProtectedRoute> <ProductDetail /> </ProtectedRoute>}  />
           <Route path="/carts" element={<ProtectedRoute> <CartPage /> </ProtectedRoute>} />
-          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/orders" element={<ProtectedRoute> <OrdersPage /> </ProtectedRoute>} />
           <Route path="/analytics" element={<Analytics />} />
         </Routes>
       </div>
