@@ -7,6 +7,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import CartPage from './pages/Carts'
 import Analytics from './pages/Analytics'
 import OrdersPage from './pages/OrdersPage'
+import UsersPage from './pages/Users.jsx'
 
 const isLoggedIn = !!localStorage.getItem("jwt")
 
@@ -28,6 +29,7 @@ function App() {
               <li className="nav-item"><Link className="nav-link" to="/carts">Carts</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/orders">Orders</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/analytics">Analytics</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/users">Users</Link></li>
             </ul>
             <ul className="navbar-nav">
               {!isLoggedIn && (
@@ -55,6 +57,7 @@ function App() {
           <Route path="/carts" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
           <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/users" element={<ProtectedRoute><UsersPage /></ProtectedRoute>} />
         </Routes>
       </main>
     </div>
