@@ -18,44 +18,45 @@ const logout = () => {
 function App() {
   return (
     <div>
-      <div>
-      <nav style={{ marginBottom: '1rem', padding: '1rem', backgroundColor: '#1a1a1a' }}>
-        <Link to="/">Home</Link> |{' '}
-        <Link to="/products">Products</Link> |{' '}
-        <Link to="/carts">Carts</Link> |{' '}
-        <Link to="/orders">Orders</Link> |{' '}
-        <Link to="/analytics">Analytics</Link> {' '}
-        {!isLoggedIn && (
-          <>
-            {' | '}
-            <Link to="/login">Login</Link>
-          </>
-        )}
-        {isLoggedIn && (
-          <>
-            {' | '}
-            <Link
-              style={{color: 'white'}}
-              onClick={logout} >
-
-              Logout
-            </Link>
-          </>
-        )}
+      {/* Navbar */}
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+        <div className="container-fluid">
+          <Link className="navbar-brand fw-bold" to="/">Dashboard</Link>
+          <div className="collapse navbar-collapse ">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item"><Link className="nav-link" to="/products">Products</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/carts">Carts</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/orders">Orders</Link></li>
+              <li className="nav-item"><Link className="nav-link" to="/analytics">Analytics</Link></li>
+            </ul>
+            <ul className="navbar-nav">
+              {!isLoggedIn && (
+                <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
+              )}
+              {isLoggedIn && (
+                <li className="nav-item">
+                  <button className="btn btn-sm btn-outline-light ms-2" onClick={logout}>
+                    Logout
+                  </button>
+                </li>
+              )}
+            </ul>
+          </div>
+        </div>
       </nav>
-      </div>
 
-      <div style={{ padding: '0 1rem' }}>
+      {/* Main Content */}
+      <main className="container mt-4">
         <Routes>
-          <Route path="/" element={<h2>Welcome to the Dashboard</h2>} />
+          <Route path="/" element={<h2 className="text-center">Welcome to the Online Shopping Platform</h2>} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/products" element={<ProductPage />} />
-          <Route path="/products/:id" element={<ProductDetail />} />
-          <Route path="/carts" element={<CartPage />} />
-          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/products" element={<ProtectedRoute><ProductPage /></ProtectedRoute>} />
+          <Route path="/products/:id" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
+          <Route path="/carts" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
+          <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
           <Route path="/analytics" element={<Analytics />} />
         </Routes>
-      </div>
+      </main>
     </div>
   )
 }

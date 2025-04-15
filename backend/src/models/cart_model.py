@@ -7,8 +7,9 @@ def find_all_carts():
     return list(get_db().carts.find())
 
 @clean_mongo_result
-def find_cart_by_user_id(cart_id):
-    return get_db().carts.find({"user_id": cart_id})
+def find_cart_by_user_id(user_id):
+    return get_db().carts.find_one({"user_id": user_id})
+
 
 @clean_mongo_result
 def find_cart_by_cart_id(cart_id):
@@ -28,3 +29,13 @@ def update_cart(cart_id, data):
 @clean_mongo_result
 def delete_cart(cart_id):
     return get_db().carts.delete_one({"cart_id": cart_id})
+
+
+# update cart by user id
+@clean_mongo_result
+def update_cart_by_user_id(user_id, items):
+    return get_db().carts.update_one(
+        {"user_id": user_id},
+        {"$set": {"items": items}},
+        upsert=True
+    )

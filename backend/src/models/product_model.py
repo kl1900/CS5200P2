@@ -36,7 +36,7 @@ def find_all_products(current_user=None) -> List[Product]:
 
         # Maybe for the buyer here too if later needed
 
-    for p in get_db().products.find():
+    for p in get_db().products.find(query):
         p = clean_mongo_doc(p)
         all_products.append(Product(**p))
     return all_products
