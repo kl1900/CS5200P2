@@ -33,14 +33,26 @@ function Analytics() {
   return (
     <div className="container py-4">
       <h1 className="mb-4 text-center fw-bold">📊 Analytics Dashboard</h1>
-
+      <div className="row g-4">
       <section>
         <h2>Top-Selling Products</h2>
-        <ul>
-          {topProducts.map((p, i) => (
-            <li key={i}>{p.productName} — {p.totalSold} sold</li>
-          ))}
-        </ul>
+        <div className="col-md-6">
+          <div className="card h-100 shadow-sm">
+            <div className="card-header bg-primary text-white">
+              Top-Selling Products
+            </div>
+            <div className="card-body">
+              <ul className="list-group list-group-flush">
+                {topProducts.map((p, i) => (
+                  <li key={i} className="list-group-item d-flex justify-content-between">
+                    <span>{p.productName}</span>
+                    <span className="text-muted">{p.totalSold} sold</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
         <ResponsiveContainer width="100%" height={300}>
           <BarChart data={topProducts} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -123,24 +135,6 @@ function Analytics() {
           </LineChart>
         </ResponsiveContainer>
       </section>
-      <div className="row g-4">
-        <div className="col-md-6">
-          <div className="card h-100 shadow-sm">
-            <div className="card-header bg-primary text-white">
-              Top-Selling Products
-            </div>
-            <div className="card-body">
-              <ul className="list-group list-group-flush">
-                {topProducts.map((p, i) => (
-                  <li key={i} className="list-group-item d-flex justify-content-between">
-                    <span>{p.productName}</span>
-                    <span className="text-muted">{p.totalSold} sold</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
 
         <div className="col-md-6">
           <div className="card h-100 shadow-sm">
