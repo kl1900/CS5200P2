@@ -38,35 +38,26 @@ to cleanup containers
 docker-compose down --volumes --remove-orphans
 ```
 
-# Presentation
-Kuo: Setup + replica + ACID transaction
-Weifan: login + authentication
-agini: Analytics Dashboard + front-end
-Xu: optimization + User management
+## MS3 Submission
 
-## MS3
-
-### (Kuo) Task 7 Data Replication & Sharding (Optional Bonus, 5 pts)
-   - Set up MongoDB replication (primary-secondary nodes).
-   - (Optional) Introduce sharding to split data across multiple instances.
+### Task 7 Data Replication (Bonus):
+   - Set up MongoDB replication (primary-secondary nodes). 
+      - See [docker-compose file](docker-compose.yml?plain=1#L39)
    - Deliverable: A document explaining their replication setup & benefits
+      - See [MongoDB Replication setup.md](docs/MongoDB%20Replication%20setup.md)
 
 
 ### Task 8: Interactive Dashboard & Data Visualization (30 pts, ~7 hrs)
-   - Build a dashboard/UI to display key metrics.
-      - UI
-         - (weifan) feature: buer able to add product into cart
-         - (weifan) double check: seller can only see their own products
-            - might needs to modify data a bit:
-               - 1 admin, 2~3 seller, rest are buyers
-         - (Xu) feature: admin remove/block buyer and sellers
-            - add a users page and show their status
-            - make sure blocked users can't login
-         - (Xu) feature: remove actions column in product page as a "buyer" user
-   - (Raagini) Use charts/tables for insights (e.g., sales trends).
-      - make current dashboard more graphical
-      - to display trends in different categories
-         - needs to add categories in products
+Goal:
+   - Build a dashboard/UI to display key metrics
+   - Use charts/tables for insights
+   - Implement real-time updates (Bonus)
+      - see implementation [here](frontend/src/pages/Analytics.jsx?plain=1#L35)
+
+Demonstration:
+
+see [dashboard page](http://localhost:5173/)
+
 
 
 
@@ -77,6 +68,9 @@ Secure Online Marketplace (E-Commerce):
 - Users can buy/sell products, add to cart, and checkout.
 - Transactions should be ACID-compliant (ensure inventory updates correctly).
 - RBAC: Buyers, sellers, and admins with different permissions.
+   - buyers can see all products, put products in carts, checkout carts, see orders
+   - sellers can create/edit/remove their own listed products
+   - admin can manage users, and edit/remove all products
 - Reviews & Recommendations using MongoDB aggregation.
 
 
