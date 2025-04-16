@@ -38,6 +38,12 @@ to cleanup containers
 docker-compose down --volumes --remove-orphans
 ```
 
+# Presentation
+Kuo: Setup + replica + ACID transaction
+Weifan: login + authentication
+agini: Analytics Dashboard + front-end
+Xu: optimization + User management
+
 ## MS3
 
 ### (Kuo) Task 7 Data Replication & Sharding (Optional Bonus, 5 pts)
