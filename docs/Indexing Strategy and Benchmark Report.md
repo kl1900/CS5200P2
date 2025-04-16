@@ -24,9 +24,41 @@ cd backend
 
 Then run the benchmark script:
 
-python benchmark_all_pipelines.py
+docker exec -it flask-backend python3 benchmark_all_pipelines.py
 
 This would add 100000 fake orders
+
+enter mongodb shell:
+
+docker exec -it mongo mongosh
+
+switch to mydb dataset:
+use mydb
+
+use 7-day-orders as an example:
+
+db.orders.explain("executionStats").aggregate([
+  {
+    $match: {
+      transaction_date: {
+        $gte: new Date(new Date().setHours(0, 0, 0, 0) - 7 * 24 * 60 * 60 * 1000),
+        $lt: new Date(new Date().setHours(0, 0, 0, 0))
+      }
+    }
+  },
+  {
+    $group: {
+      _id: { $dateToString: { format: "%Y-%m-%d", date: "$transaction_date" } },
+      count: { $sum: 1 }
+    }
+  },
+  {
+    $sort: { _id: 1 }
+  }
+])
+
+
+db.orders.createIndex({ transaction_date: 1 })
 
 Index Creation Scripts:
 
@@ -40,6 +72,7 @@ users: { user_id: 1 }
 
 Orders Last 7 Days
 orders: { transaction_date: 1 }
+db.orders.createIndex({ transaction_date: 1 })
 
 Query Execution Plans and Analysis:(The specific logs are stored in docs/logs for queries)
 Top Selling Products (Last 30 Days)
