@@ -3,13 +3,11 @@ from src.db import get_db
 from datetime import datetime, timedelta
 
 analytics_bp = Blueprint("analytics", __name__)
-thirty_days_ago = datetime.utcnow() - timedelta(days=30)
 
 @analytics_bp.route("/analytics/top-products", methods=["GET"])
 def top_products():
     db = get_db()
     pipeline = [
-        {"$match": {"transaction_date": {"$gte": thirty_days_ago}}},
         {"$unwind": "$items"},
         {"$group": {
             "_id": "$items.product_id",
@@ -37,9 +35,6 @@ def top_products():
 def most_active_buyers():
     db = get_db()
     pipeline = [
-        {"$match": {
-            "transaction_date": {"$gte": thirty_days_ago}
-        }},
         {"$group": {
             "_id": "$user_id",
             "totalOrders": {"$sum": 1}
