@@ -28,7 +28,6 @@ function App() {
               <li className="nav-item"><Link className="nav-link" to="/products">Products</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/carts">Carts</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/orders">Orders</Link></li>
-              <li className="nav-item"><Link className="nav-link" to="/analytics">Analytics</Link></li>
               <li className="nav-item"><Link className="nav-link" to="/users">Users</Link></li>
             </ul>
             <ul className="navbar-nav">
@@ -50,13 +49,12 @@ function App() {
       {/* Main Content */}
       <main className="container mt-4">
         <Routes>
-          <Route path="/" element={<h2 className="text-center">Welcome to the Online Shopping Platform</h2>} />
+          <Route path="/" element={<Analytics />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/products" element={<ProtectedRoute><ProductPage /></ProtectedRoute>} />
           <Route path="/products/:id" element={<ProtectedRoute><ProductDetail /></ProtectedRoute>} />
           <Route path="/carts" element={<ProtectedRoute><CartPage /></ProtectedRoute>} />
           <Route path="/orders" element={<ProtectedRoute><OrdersPage /></ProtectedRoute>} />
-          <Route path="/analytics" element={<Analytics />} />
           <Route path="/users" element={<ProtectedRoute><UsersPage /></ProtectedRoute>} />
         </Routes>
       </main>
